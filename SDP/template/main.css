@@ -3,34 +3,34 @@
 	font-family: "Roboto" !important;
 }
 
-.title
-{
-  color: #47525E;
-  font-family: Roboto;
-  font-size: 40px;
-  font-weight: 900;
-  line-height: 50px;
-  text-align: center;
-}
-
 .button
 {
-  background-color: #3A3837;
-  border: 2px solid #3A3837;
-  color: #FFFFFF;
-  padding: 10px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius: 3px;
-  border:none;
+	background-color: #3A3837;
+	border: 2px solid #3A3837;
+	color: #FFFFFF;
+	padding: 10px 24px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
+	border-radius: 3px;
+	border:none;
 }
 
 .button:hover {
-  background-color: #FFFFFF;
-  color: #3A3837;
+	background-color: #FFFFFF;
+	color: #3A3837;
+}
+
+.title
+{
+	color: #47525E;
+	font-family: Roboto;
+	font-size: 40px;
+	font-weight: 900;
+	line-height: 50px;
+	text-align: center;
 }

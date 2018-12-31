@@ -1,7 +1,7 @@
 
 <html lang="en" dir="ltr">
   <head>
-    <?php include('template/header.php');?>
+    <?php include('../../template/header.php');?>
     <meta charset="utf-8">
     <title>Admin Menu</title>
     <style media="screen">
@@ -40,11 +40,12 @@
     </style>
   </head>
   <body>
-    <?php include('template/navbar.php');?>
+    <?php include('../../template/navbar.php');?>
     <div class="" style="height:900px; background-color:#F2E4B9; padding-top:5%;">
 
     </div>
   </body>
-    <?php include('template/footer.php');?>
-    <script type="text/javascript" src="javascripts/basic.js"></script>
+    <?php include('../../template/footer.php');?>
+    <script type="text/javascript" src="/SDP/javascripts/main.js"></script>
+
 </html>

@@ -19,3 +19,5 @@
 <style type="text/css">
    body { background: #FAFAFA !important; }
 </style>
+
+<script src="template/main.js"></script>

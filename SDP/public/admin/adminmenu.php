@@ -46,11 +46,14 @@
         <div class="container pt-5">
           <div class="row justify-content-around">
             <div class="col">
-              <a href="#">
+              <a href="adminaddteacher.php">
                 <img src="../../img/like.png" class="rounded" alt="..." style="  width: 246.13px; height: 246.13px;" >
               </a>
                <br>
-               <button type="button" class="button mt-5" style="width:200px">Create New Teacher</button>
+               <a href="adminaddteacher.php">
+                 <button type="button" class="button mt-5" style="width:200px">Create New Teacher</button>
+               </a>
+
             </div>
             <div class="col">
               <a href="#">
@@ -65,5 +68,5 @@
     </div>
   </body>
     <?php include('../../template/footer.php');?>
-    <script type="text/javascript" src="javascripts/basic.js"></script>
+    <script type="text/javascript" src="/SDP/javascripts/main.js"></script>
 </html>

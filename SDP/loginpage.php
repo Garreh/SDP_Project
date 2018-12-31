@@ -19,23 +19,22 @@
       </div>
     </nav>
 
-    <div class="" style=" background-color:#F2E4B9; padding-top:5%;">
+    <div class="" style="height:800px;background-color:#F2E4B9; padding-top:5%;">
       <center>
         <h1 class="title pt-5">Login As</h1>
+        <br>
         <div class="">
-          <button type="button" name="button" class="btn" id="" onclick="" style="width:150px;font-size:20px">Student</button>
-          <button type="button" name="button" class="btn" id=""onclick="" style="width:150px;font-size:20px">Teacher</button>
+          <button type="button" name="button" class=" btn" id="studentbtn" onclick="studentlog()" style="width:172px;font-size:20px;background-color:#3A3837;color:#FFFFFF;">Student</button>
+          <button type="button" name="button" class="btn" id="teacherbtn"onclick="teacherlog()" style="width:172px;font-size:20;background-color:#3A3837;color:#FFFFFF;">Teacher</button>
         </div>
 
-        <form name="form" method="post" id="" class="form-std form-horizontal container pt-5" >
+        <form name="form" method="post" id="stdlog" class="form-std form-horizontal container" style="display:none" >
           <div class="form-group row justify-content-center">
 
           </div>
-          <br>
-          <br>
           <div class="form-group row justify-content-center">
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="inputID" placeholder="Login ID">
+              <input type="text" class="form-control" id="inputUsername" placeholder="Login ID">
             </div>
           </div>
           <div class="form-group row justify-content-center">
@@ -43,11 +42,17 @@
               <input type="password" class="form-control" id="inputPassword" placeholder="Password">
             </div>
           </div>
-          <br>
-          <br>
+          <div class="form-group row justify-content-center">
+            <div class="col-sm-4">
+              <p style="font-size:1em;color:red;padding-top:10px;" id="errmsg"></p>
+            </div>
+          </div>
           <div class="form-group row justify-content-center">
             <div class="col-sm-7 text-center">
-              <button type="button" class="button btn-lg pl-5 pr-5" onclick="">Login</button>
+              <button type="button" class="button btn-lg pl-5 pr-5"  onclick="stdlogin()">Login</button>
+            </div>
+            <div class="col-sm-7 text-center">
+              <p style="font-size:1em;color:red;padding-top:10px;" id="errmsg"></p>
             </div>
           </div>
           <div class="form-group row justify-content-center">
@@ -61,34 +66,34 @@
             </div>
           </div>
         </form>
-        <form name="form" method="post" id="" class="form-std form-horizontal container pt-5" >
+
+        <form name="form" method="post" id="tchlog" class="form-std form-horizontal container" style="display:none">
           <div class="form-group row justify-content-center">
 
           </div>
-          <br>
-          <br>
+
           <div class="form-group row justify-content-center">
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="inputID" placeholder="Login ID">
+              <input type="text" class="form-control" id="inputUsername2" placeholder="Login ID">
             </div>
           </div>
           <div class="form-group row justify-content-center">
             <div class="col-sm-4">
-              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
             </div>
           </div>
-          <br>
-          <br>
+          <div class="form-group row justify-content-center">
+            <div class="col-sm-4">
+              <p style="font-size:1em;color:red;padding-top:10px;" id="errmsg2"></p>
+            </div>
+          </div>
           <div class="form-group row justify-content-center">
             <div class="col-sm-7 text-center">
-              <button type="button" class="button btn-lg pl-5 pr-5" onclick="">Login</button>
+              <button type="button" class="button btn-lg pl-5 pr-5" onclick="tchlogin()">Login</button>
             </div>
           </div>
           <div class="form-group row justify-content-center">
             <div class="col-sm-4">
-              <small id="passwordHelpBlock" class="form-text text-muted">
-                <a href="/SDP/signuppage.php">Need an account? Sign up here.</a>
-              </small>
               <small id="passwordHelpBlock" class="form-text text-muted">
                 <a href="">Forgot your password?</a>
               </small>
