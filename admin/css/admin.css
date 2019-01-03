@@ -1,0 +1,173 @@
+﻿body{
+	clip: rect(0, 0, 0, 0);
+	height: 100%;
+    background-color: #FFDDAA;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    animation-name: color-ex;
+    animation-duration: 4s;
+    position: relative;
+}
+.register_button{
+    background-color: #FF3333;
+    color: white;
+    float:right;
+    border-radius: 3px;
+    width: 75px;
+    height: 32px;
+    font-size: 15px;
+    padding: 5px;
+    border: none;
+    margin-top: 0.8%;
+    margin-right: 1%;
+}
+.register_button:hover{
+    background-color: red;
+    cursor: pointer;
+}
+.login_button{
+    background-color: #444444;
+    color: white;
+    float:right;
+    border-radius: 3px;
+    height: 32px;
+    font-size: 15px;
+    border: none;
+    margin-top: 0.8%;
+}
+.login_button:hover{
+    font-size: 16px;
+    cursor: pointer;
+    color: aquamarine;
+}
+
+.login_footer{
+    overflow: hidden;
+    float: left;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: #444444;
+    color: white;
+    text-align: center;
+}
+.login_footer button{
+    background-color: #FF3333;
+    color: white;
+    border-radius: 3px;
+    width: 75px;
+    height: 32px;
+    font-size: 15px;
+    padding: 5px;
+    border: none;
+}
+.login_footer button:hover{
+    background-color: red;
+    cursor: pointer;
+}
+.login_box{
+	margin-top: 6%;
+	padding: 10px;
+	width: 40%;
+	font-size: 20px;
+	color: #444444;
+    border-radius: 5px;
+}
+.login_box h1{
+    color: #444444;
+}
+.home{
+    position: relative;
+    width: 90%;
+    height: 70%;
+    margin-top: 10%;
+}
+.func{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 200px;
+    height: 200px;
+    width: 250px;
+    font-size: 40px;
+    margin: 50px;
+    background-color: #444444;
+    color: aliceblue;
+    border: none;
+    border-radius: 3px;
+}
+.func:hover{
+    border: red 2px solid;
+    background-color: antiquewhite;
+    cursor: pointer;
+}
+
+.home a{
+    color: aliceblue;
+    text-decoration: none;
+}
+.func:hover, .home a:visited:hover{
+    color: #444444;
+    font-weight: heavy;
+}
+
+.home a:visited{
+    color: aliceblue;
+}
+.home a:visited:hover{
+    color: #444444;
+    font-weight: heavy;
+}
+@keyframes color-ex {
+  from {background-color: beige;}
+  to {background-color: #FFDDAA;}
+}
+
+input[type=text], input[type=password]{
+	width: 300px;
+	height: 30px;
+	margin: 12px;
+	padding: 10px;
+	background-color: white;
+	color: black;
+	border-radius: 3px;
+    border: none;
+}
+input[type=submit]{
+    width: 175px;
+    height: 50px;
+    font-size: 20px;
+    font: Verdana
+    margin: 5px;
+    padding: 5px;
+    color: antiquewhite;
+    background-color: darkslategray;
+    border-radius: 5px;
+    border: none;
+}
+input[type=submit]:hover{
+    background-color: azure;
+    color: deeppink;
+    cursor: pointer;
+    animation: shake 1.4s;
+    animation-iteration-count: infinite; 
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-0.5deg); }
+  20% { transform: translate(-3px, 0px) rotate(0.5deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(0.5deg); }
+  50% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-0.5deg); }
+  80% { transform: translate(-1px, -1px) rotate(0.5deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-0.5deg); }
+}
+
+
+
+
