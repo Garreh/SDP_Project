@@ -14,6 +14,14 @@ if(!isset($_SESSION['admin']))
 {
     echo "<script>alert('Please login first, admin')</script>";
     die("<script>window.location.href='admin_login.php'</script>");
+}else{
+    $now = time();
+    if($now > $_SESSION['expire'])//if the session expired
+  	{
+        echo "<script>alert('Your session has expired!Please Login Again!')</script>";
+        echo "<script>window.location.href='admin_login.php'</script>";
+        session_destroy();
+    }
 } 
     
 ?>

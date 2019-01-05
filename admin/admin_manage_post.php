@@ -9,6 +9,8 @@
 <body>
 <?php include "navi.php" ?>
     
+
+    
 <?php include "footer.php" ?>
 </body>
 

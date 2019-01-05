@@ -1,4 +1,4 @@
-<div class="login_footer">
+<div class="footer">
     <?php if(isset($_SESSION['admin']))
     {
     ?>
