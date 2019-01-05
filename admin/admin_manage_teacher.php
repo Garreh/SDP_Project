@@ -45,6 +45,7 @@ $(document).ready(function(){
             data: {sort: s},
             success: function(result){
             $("#result").html(result);
+            $("#temp").css('display','none')
         }
       });
    });
@@ -62,13 +63,54 @@ $(document).ready(function(){
 
     <div id="manage_box">Sort by: 
         <select id="sort" name="sort">
-            <option value="">Please Select</option>
             <option value="id">ID</option>
             <option value="username">Username</option>
             <option value="email">Email</option>
         </select>
         
             <span id="result"></span>
+            
+            <?php
+                include "conn.php";
+                $sql = "SELECT * FROM teacher";
+                $result = mysqli_query($conn,$sql);
+                if(mysqli_num_rows($result)<=0){
+                    echo "<p id='temp'>There is no teacher yet<br/></p>";
+                }
+                else
+                {
+                    echo "<table id='temp' border='2px'>";
+                    echo "<tr>";
+                    echo "<th>ID </th>";    
+                    echo "<th>Name </th>";    
+                    echo "<th>Username </th>";    
+                    echo "<th>Email </th>";    
+                    echo "<th>Date Of Birth </th>";    
+                    echo "</tr>";
+                    while($row = mysqli_fetch_array($result))
+                    {
+                        $id = $row['teacher_id'];
+                        $name = $row['first_name']." ".$row['last_name'];
+                        $username = $row['teacher_username'];
+                        $email = $row['teacher_email'];
+                        $dob = $row['dob'];
+                        if($dob == "")
+                        {
+                            $dob = "Not set";
+                        }
+                        echo "<tr>";
+                        echo "<td><input type='text' value='".$id."' disabled/>";
+                        echo "<td><input type='text' value='".$name."' disabled/>";
+                        echo "<td><input type='text' value='".$username."' disabled/>";
+                        echo "<td><input type='text' value='".$email."' disabled/>";
+                        echo "<td><input type='text' value='".$dob."' disabled/>";
+                        echo "<td><input type='button' value='Delete' onclick=\"window.location.href='confirm.php?teacher_id=$id'\"/></td>";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                }
+            ?>
+            
     
     </div>
     

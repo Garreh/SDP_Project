@@ -1,4 +1,5 @@
 <?php
+
     include "conn.php";
     if(isset($_POST['password']) && isset($_POST['password2']))
     {

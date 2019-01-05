@@ -9,6 +9,7 @@
             $found = mysqli_query($conn,$sql);
             if(mysqli_num_rows($found)<=0){
                 $result = "There is no teacher yet";
+                echo "<br/><br/>".$result."<br/><br/>";
             }else{
                 $result[0] = "<table border='2px'>";
                 $result[1] = "<tr>";
@@ -39,15 +40,16 @@
                         $result[11] = "<td><input type='text' value='".$username."' disabled/></td>";
                         $result[12] = "<td><input type='text' value='".$email."' disabled/></td>";
                         $result[13] = "<td><input type='text' value='".$dob."' disabled/></td>";
-                        $result[14] = "</tr>";
+                        $result[14] = "<td><input type='button' value='Delete' onclick=\"window.location.href='confirm.php?teacher_id=$id'\"/></td>";
+                        $result[15] = "</tr>";
                         
-                    for($i=8;$i<15;$i++)
+                    for($i=8;$i<16;$i++)
                     {
                        echo $result[$i]; 
                     }                   
                 }
-                $result[15] = "</table>";
-                echo $result[15];
+                $result[16] = "</table>";
+                echo $result[16];
             }
         }
         else if($sort == "username")
@@ -56,6 +58,7 @@
             $found = mysqli_query($conn,$sql);
             if(mysqli_num_rows($found)<=0){
                 $result = "There is no teacher yet";
+                echo "<br/><br/>".$result."<br/><br/>";
             }else{
                 $result[0] = "<table border='2px'>";
                 $result[1] = "<tr>";
@@ -86,15 +89,16 @@
                         $result[11] = "<td><input type='text' value='".$username."' disabled/></td>";
                         $result[12] = "<td><input type='text' value='".$email."' disabled/></td>";
                         $result[13] = "<td><input type='text' value='".$dob."' disabled/></td>";
-                        $result[14] = "</tr>";
+                        $result[14] = "<td><input type='button' value='Delete' onclick=\"window.location.href='confirm.php?teacher_id=$id'\"/></td>";
+                        $result[15] = "</tr>";
                         
-                    for($i=8;$i<15;$i++)
+                    for($i=8;$i<16;$i++)
                     {
                        echo $result[$i]; 
                     }                   
                 }
-                $result[15] = "</table>";
-                echo $result[15];
+                $result[16] = "</table>";
+                echo $result[16];
             }
         }
         else if($sort == "email")
@@ -103,6 +107,7 @@
             $found = mysqli_query($conn,$sql);
             if(mysqli_num_rows($found)<=0){
                 $result = "There is no teacher yet";
+                echo "<br/><br/>".$result."<br/><br/>";
             }else{
                 $result[0] = "<table border='2px'>";
                 $result[1] = "<tr>";
@@ -133,19 +138,17 @@
                         $result[11] = "<td><input type='text' value='".$username."' disabled/></td>";
                         $result[12] = "<td><input type='text' value='".$email."' disabled/></td>";
                         $result[13] = "<td><input type='text' value='".$dob."' disabled/></td>";
-                        $result[14] = "</tr>";
+                        $result[14] = "<td><input type='button' value='Delete' onclick=\"window.location.href='confirm.php?teacher_id=$id'\"/></td>";
+                        $result[15] = "</tr>";
                         
-                    for($i=8;$i<15;$i++)
+                    for($i=8;$i<16;$i++)
                     {
                        echo $result[$i]; 
                     }                   
                 }
-                $result[15] = "</table>";
-                echo $result[15];
+                $result[16] = "</table>";
+                echo $result[16];
             }
-        }
-        else if($sort == ""){
-            $result = "";
         }
         else
         {
@@ -153,6 +156,7 @@
             $found = mysqli_query($conn,$sql);
                 if(mysqli_num_rows($found)<=0){
                     $result = "There is no teacher yet";
+                    echo "<br/><br/>".$result."<br/><br/>";
                 }else{
                    $result[0] = "<table border='2px'>";
                     $result[1] = "<tr>";
@@ -183,15 +187,16 @@
                             $result[11] = "<td><input type='text' value='".$username."' disabled/></td>";
                             $result[12] = "<td><input type='text' value='".$email."' disabled/></td>";
                             $result[13] = "<td><input type='text' value='".$dob."' disabled/></td>";
-                            $result[14] = "</tr>";
+                            $result[14] = "<td><input type='button' value='Delete' onclick=\"window.location.href='confirm.php?teacher_id=$id'\"/></td>";
+                            $result[15] = "</tr>";
 
-                        for($i=8;$i<15;$i++)
+                        for($i=8;$i<16;$i++)
                         {
                            echo $result[$i]; 
                         }                   
                     }
-                    $result[15] = "</table>";
-                    echo $result[15];
+                    $result[16] = "</table>";
+                    echo $result[16];
                 }
             }
         }

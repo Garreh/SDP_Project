@@ -1,4 +1,12 @@
 <?php
+
+    session_start();
+    if(!isset($_SESSION['admin']))//admin must always login first
+    {
+        echo "<script>alert('You have not login yet, admin')</script>";
+        die("<script>window.location.href='admin_login.php'</script>");
+    }
+
     include "conn.php";
     
     if(isset($_POST['password']) && isset($_POST['password2']))
