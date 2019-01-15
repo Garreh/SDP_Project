@@ -93,7 +93,7 @@
             </div>
           </div>
           <div class="form-group row justify-content-center">
-            <div class="col-sm-4">
+            <div class="col-sm-4 mt-4">
               <small id="passwordHelpBlock" class="form-text text-muted">
                 <a href="">Forgot your password?</a>
               </small>

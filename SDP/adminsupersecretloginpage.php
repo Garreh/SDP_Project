@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <?php include('template/header.php');?>
+
     <meta charset="utf-8">
     <title>History</title>
   </head>
@@ -24,18 +25,57 @@
         <h1 class="title pt-5">Admin Login</h1>
         <br>
 
-        <form name="form" method="post" id="stdlog" class="form-std form-horizontal container" >
+        <form name="form" method="post" class="form-std form-horizontal container" >
           <div class="form-group row justify-content-center">
 
           </div>
           <div class="form-group row justify-content-center">
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="inputUsername" placeholder="Login ID">
+              <input type="text" class="form-control" id="inputUsername3" placeholder="Login ID">
             </div>
           </div>
           <div class="form-group row justify-content-center">
             <div class="col-sm-4">
-              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group row justify-content-center">
+            <div class="col-sm-4">
+              <p style="font-size:1em;color:red;padding-top:10px;" id="errmsg"></p>
+            </div>
+          </div>
+          <div class="form-group row justify-content-center">
+            <div class="col-sm-7 text-center">
+              <button type="button" class="button btn-lg pl-5 pr-5"  onclick="adminlogin()">Login</button>
+            </div>
+            <div class="col-sm-7 text-center">
+              <p style="font-size:1em;color:red;padding-top:10px;" id="errmsg"></p>
+            </div>
+          </div>
+          <div class="form-group row justify-content-center">
+            <div class="col-sm-4">
+              <small id="passwordHelpBlock" class="form-text text-muted">
+                <a href="/SDP/signuppage.php">Need an account? Sign up here.</a>
+              </small>
+              <small id="passwordHelpBlock" class="form-text text-muted">
+                <a href="">Forgot your password?</a>
+              </small>
+            </div>
+          </div>
+        </form>
+
+        <!-- <form name="form" method="post" id="stdlog" class="form-std form-horizontal container" >
+          <div class="form-group row justify-content-center">
+
+          </div>
+          <div class="form-group row justify-content-center">
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="inputUsername3" placeholder="Login ID">
+            </div>
+          </div>
+          <div class="form-group row justify-content-center">
+            <div class="col-sm-4">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
             </div>
           </div>
           <div class="form-group row justify-content-center">
@@ -58,7 +98,7 @@
               </small>
             </div>
           </div>
-        </form>
+        </form> -->
       </center>
     </div>
   </body>

@@ -59,7 +59,7 @@
           <a href="/SDP/loginpage.php" class="btn btn-danger btn-rounded">LOGIN</a>
       </div>
     </nav>
-    <div class="" style="height:900px; background-color:#F2E4B9; padding-top:2%;">
+    <div class="" style="height:1100px; background-color:#F2E4B9; padding-top:2%;">
       <center>
         <form name="form" method="post" id="" class="form-horizontal container ">
           <div class="form-group row justify-content-center">

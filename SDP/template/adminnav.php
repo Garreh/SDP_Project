@@ -8,25 +8,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-family:Roboto;">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="../admin/admin_home.php">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" >Post</a>
+        <a class="nav-link" href="../public/admin/admin_manage_post.php" >Post</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Discover</a>
+        <a class="nav-link" href="../public/admin/admin_manage_teacher.php">Teacher</a>
       </li>
     </ul>
-    <?php if(isset($_SESSION['username'])){ ?>
+    <?php if(isset($_SESSION['admin'])){ ?>
       <button type="button" name="button" class="btn btn-danger btn-rounded" onclick="logout()">LOGOUT</button>
     <?php }else{ ?>
-      <a class="nav-link" href="/SDP/loginpage.php" style="text-decoration: none;color:#FFFFFF;">LOGIN</a>
+      <a class="nav-link" href="/SDP/public/admin/admin_login.php" style="text-decoration: none;color:#FFFFFF;">LOGIN</a>
       <a href="/SDP/signuppage.php" class="btn btn-danger btn-rounded">SIGN UP</a>
   <?php   } ?>
 

@@ -1,0 +1,343 @@
+﻿body{
+	clip: rect(0, 0, 0, 0);
+	height: 100%;
+    background-color: #FFDDAA;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    animation-name: color-ex;
+    animation-duration: 4s;
+    position: relative;
+}
+@keyframes color-ex {
+  from {background-color: beige;}
+  to {background-color: #FFDDAA;}
+}
+/* /////////////////// */
+/* /////////////////// */
+
+/*Register & Login Page*/
+
+/* /////////////////// */
+/* /////////////////// */
+.register_button{
+    background-color: #FF3333;
+    color: white;
+    float:right;
+    border-radius: 3px;
+    width: 75px;
+    height: 32px;
+    font-size: 15px;
+    padding: 5px;
+    border: none;
+    margin-top: 0.8%;
+    margin-right: 1%;
+}
+.register_button:hover{
+    background-color: red;
+    cursor: pointer;
+}
+.login_button{
+    background-color: #444444;
+    color: white;
+    float:right;
+    border-radius: 3px;
+    height: 32px;
+    font-size: 15px;
+    border: none;
+    margin-top: 0.8%;
+}
+.login_button:hover{
+    font-size: 16px;
+    cursor: pointer;
+    color: aquamarine;
+}
+.login_box{
+	margin-top: 6%;
+	padding: 10px;
+	width: 40%;
+	font-size: 20px;
+	color: #444444;
+    border-radius: 5px;
+}
+.login_box h1{
+    color: #444444;
+}
+/* /////////////////// */
+/* /////////////////// */
+
+        /*Footer*/
+
+/* /////////////////// */
+/* /////////////////// */
+.footer{
+    overflow: hidden;
+    float: left;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: #444444;
+    color: white;
+    text-align: center;
+}
+.footer button{
+    background-color: #FF3333;
+    color: white;
+    border-radius: 3px;
+    width: 75px;
+    height: 32px;
+    font-size: 15px;
+    padding: 5px;
+    border: none;
+}
+.footer button:hover{
+    background-color: red;
+    cursor: pointer;
+}
+/* /////////////////// */
+/* /////////////////// */
+
+      /*Home Page*/
+
+/* /////////////////// */
+/* /////////////////// */
+.home{
+    position: relative;
+    width: 90%;
+    height: 70%;
+    margin-top: 10%;
+}
+.func{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 200px;
+    height: 200px;
+    width: 250px;
+    font-size: 40px;
+    margin: 50px;
+    background-color: #444444;
+    color: aliceblue;
+    border: none;
+    border-radius: 3px;
+}
+.func:hover{
+    border: red 2px solid;
+    background-color: antiquewhite;
+    cursor: pointer;
+}
+
+.home a{
+    color: aliceblue;
+    text-decoration: none;
+}
+.func:hover, .home a:visited:hover{
+    color: #444444;
+    font-weight: heavy;
+}
+
+.home a:visited{
+    color: aliceblue;
+}
+.home a:visited:hover{
+    color: #444444;
+    font-weight: heavy;
+}
+/* //////////////////// */
+/* //////////////////// */
+
+        /* Post */
+
+/* //////////////////// */
+/* //////////////////// */
+
+/*Wait for normal post function done*/
+
+
+
+/* //////////////////// */
+/* //////////////////// */
+
+      /* Teacher */
+
+/* //////////////////// */
+/* //////////////////// */
+
+.manage_register{
+    display: inline-block;   
+    margin-top: 4.5%;
+    width: 180px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    background-color: #444444;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    font-weight: heavy;
+}
+.manage_register:hover{
+    font-size: 21px;
+    font-weight: normal;
+    background-color: white;
+    color: #444444;
+    border-radius: 3px;
+    border: red solid 2px;
+    cursor: pointer;
+}
+#manage_box{
+    display: none;
+    width: 85%;
+    margin-top: 1%;
+    height: auto;
+    padding: 5px;
+    background-color: white;
+    border: 3px double black;
+}
+#manage_box select{
+    width: 30%;
+    height: 30px;
+    background-color: aliceblue;
+    color: black;
+    padding: 3px;
+    margin: 10px;
+}
+#manage_box select:hover{
+    background-color: bisque;
+    color: #444444;
+    cursor: pointer;
+}
+#manage_box table{
+    width: 75%;
+}
+#manage_box input[type=text]{
+    height: 30px;
+    width: 205px;
+    background-color: aliceblue;
+    color: black;
+    padding: 3px;
+    margin: 3px;
+}
+#manage_box input[type=text]:hover{
+    background-color: bisque;
+    color: #444444;
+    cursor: pointer;
+}
+#manage_box input[type=button]{
+    height: 30px;
+    width: 75px;
+    background-color: aliceblue;
+    color: black;
+    padding: 3px;
+    margin: 3px;
+}
+#manage_box input[type=button]:hover{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+#register_box{
+    display: none;
+    margin-top: 1%;
+    margin-bottom: 100px;
+    width: 80%;
+    height: 485px;
+    padding: 1px;
+    background-color: white;
+    border: 3px double black;
+}
+#register_box input[type=text],#register_box input[type=password]{
+    height: 30px;
+    width: 300px;
+    font-size: 15px;
+    background-color: aliceblue;
+    color: black;
+    padding: 5px;
+    margin: 20px;
+    margin-left: 0;
+}
+#register_box input[type=text]:hover,#register_box input[type=password]:hover{
+    background-color: bisque;
+    color: #444444;
+    cursor: text;
+}
+#register_box span{
+    margin-right: 25px;
+}
+#separate{
+    margin: 20px;
+    text-align: left;
+    display: inline-block;
+    width: 25%;
+    margin-top: 1%;
+    margin-bottom: 5px;
+}
+/* //////////////////// */
+/* //////////////////// */
+.confirm button{    
+    background-color: aqua;
+	color: black;
+	width: 225px;
+	height: 45px;
+	font-size: 25px;
+	font-family: Consolas;
+	display:inline-block;
+	margin: 20px;
+	margin-top: 10%;
+}
+.confirm button:hover{    
+    background-color: white;
+    color: #00DDAA;
+    cursor: pointer;
+}
+input[type=text], input[type=password]{
+	width: 300px;
+	height: 30px;
+	margin: 12px;
+	padding: 10px;
+	background-color: white;
+	color: black;
+	border-radius: 3px;
+    border: none;
+}
+input[type=submit]{
+    width: 175px;
+    height: 50px;
+    font-size: 20px;
+    font: Verdana
+    margin: 5px;
+    padding: 5px;
+    color: antiquewhite;
+    background-color: darkslategray;
+    border-radius: 5px;
+    border: none;
+}
+input[type=submit]:hover{
+    background-color: deepskyblue;
+    color: black;
+    cursor: pointer;
+    animation: shake 1.4s;
+    animation-iteration-count: infinite; 
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-0.5deg); }
+  20% { transform: translate(-3px, 0px) rotate(0.5deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(0.5deg); }
+  50% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-0.5deg); }
+  80% { transform: translate(-1px, -1px) rotate(0.5deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-0.5deg); }
+}
+
+
+
+
+
+

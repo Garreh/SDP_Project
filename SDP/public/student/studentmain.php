@@ -1,4 +1,4 @@
-
+<?php session_start() ?>
 <html lang="en" dir="ltr">
   <head>
     <?php include('../../template/header.php');?>
@@ -42,7 +42,7 @@
   <body>
     <?php include('../../template/navbar.php');?>
     <div class="" style="height:900px; background-color:#F2E4B9; padding-top:5%;">
-
+    <?php if (isset($_SESSION["username"])){ echo "Welcome {$_SESSION['username']},{$_SESSION['student_email']}";} ?>
     </div>
   </body>
     <?php include('../../template/footer.php');?>
