@@ -18,17 +18,17 @@ function(){
 		{
 			if(data.status == true)
 			{
-                $('#result').html(data.msg).css('color','green');//message color=green
+                $('#result2').html(data.msg).css('color','green');//message color=green
                 $('#Register').attr("disabled",false);	//the button is enable again
 			}
             else if(data.status == "moderate")
 			{
-                $('#result').html(data.msg).css('color','#EE7700');//message color=green
+                $('#result2').html(data.msg).css('color','#EE7700');//message color=green
                 $('#Register').attr("disabled",false);	//the button is enable again
 			}
 			else
 			{
-                $('#result').html(data.msg).css('color','red');	//message color=red
+                $('#result2').html(data.msg).css('color','red');	//message color=red
                 $('#Register').attr("disabled",true);	//the button is disable
 			}
 		}, 'json');
@@ -79,6 +79,7 @@ $(document).ready(function(){
                 }
                 else
                 {
+                    
                     echo "<table id='temp' border='2px'>";
                     echo "<tr>";
                     echo "<th>ID </th>";    
@@ -98,6 +99,7 @@ $(document).ready(function(){
                         {
                             $dob = "Not set";
                         }
+                        
                         echo "<tr>";
                         echo "<td><input type='text' value='".$id."' disabled/>";
                         echo "<td><input type='text' value='".$name."' disabled/>";
@@ -106,6 +108,7 @@ $(document).ready(function(){
                         echo "<td><input type='text' value='".$dob."' disabled/>";
                         echo "<td><input type='button' value='Delete' onclick=\"window.location.href='confirm.php?teacher_id=$id'\"/></td>";
                         echo "</tr>";
+                        
                     }
                     echo "</table>";
                 }
@@ -120,22 +123,30 @@ $(document).ready(function(){
             <p style="font-size: 20px;">Register Teacher</p>
             <div id="separate">
             <label>First Name</label><br/>
-            <input type="text" name="fname" placeholder="Enter First Name"/><br/>
-            <label>Username</label><br/>
-            <input type="text" name="username" placeholder="Enter Username"/><br/>
-            <label>Password</label><br/>
-            <input type="password" id="password" name="password" placeholder="Enter Password"/><br/>
+            <input type="text" name="fname" required="required" placeholder="Enter First Name"/><br/>
             </div>
             <div id="separate">
             <label>Last Name</label><br/>
-            <input type="text" name="lname" placeholder="Enter Last Name"/><br/>
+            <input type="text" name="lname" required="required" placeholder="Enter Last Name"/><br/>
+            </div>
+            <div id="separate">
+            <label>Username</label><br/>
+            <input type="text" name="username" required="required" placeholder="Enter Username"/><br/>
+            </div>
+            <div id="separate">
             <label>Email</label><br/>
-            <input type="text" name="email" placeholder="Enter Email"/><br/>   
+            <input type="text" name="email" required="required" placeholder="Enter Email"/><br/>   
+            </div>
+            <div id="separate">
+            <label>Password</label><br/>
+            <input type="password" id="password" name="password" required="required" placeholder="Enter Password"/><br/>
+            </div>  
+            <div id="separate">
             <label>Confirm Password</label><br/>
-            <input type="password" name="password2" placeholder="Re-enter Password"/><br/>
+            <input type="password" name="password2" required="required" placeholder="Re-enter Password"/><br/>
             </div><br/>
-            <span id="result"></span><br/><br/>
-            <input type="submit" value="Register"/>
+            <span id="result2"></span><br/><br/>
+            <input type="submit" id="Register" value="Register"/>
         </form>
     </div>
 </center>

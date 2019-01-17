@@ -192,10 +192,10 @@
     display: none;
     width: 85%;
     margin-top: 1%;
-    height: auto;
     padding: 5px;
     background-color: white;
     border: 3px double black;
+    margin-bottom: 10%;
 }
 #manage_box select{
     width: 30%;
@@ -211,15 +211,18 @@
     cursor: pointer;
 }
 #manage_box table{
-    width: 75%;
+    width: 75vw;
 }
 #manage_box input[type=text]{
     height: 30px;
-    width: 205px;
+    width: 100%;
     background-color: aliceblue;
     color: black;
     padding: 3px;
     margin: 3px;
+}
+#manage_box table{
+    width: 80vw;
 }
 #manage_box input[type=text]:hover{
     background-color: bisque;
@@ -248,10 +251,11 @@
     padding: 1px;
     background-color: white;
     border: 3px double black;
+    margin-bottom: 10%;
 }
 #register_box input[type=text],#register_box input[type=password]{
     height: 30px;
-    width: 300px;
+    width: 20vw;
     font-size: 15px;
     background-color: aliceblue;
     color: black;
@@ -271,7 +275,7 @@
     margin: 20px;
     text-align: left;
     display: inline-block;
-    width: 25%;
+    width: 30%;
     margin-top: 1%;
     margin-bottom: 5px;
 }
