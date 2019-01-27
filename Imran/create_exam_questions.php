@@ -16,7 +16,7 @@
     
 <div class="container" id="quizContainer">
 <form method="post" action="insert_exam_answer.php">
-    <div class="title" style="margin-bottom: 50px; font-size:30px; padding-top:20px;"><strong>Create Quiz</strong></div>
+    <div class="title" style="margin-bottom: 50px; font-size:30px; padding-top:20px;"><strong>Create Test</strong></div>
     
     <input type="text" class="form-control" name="test_title" style="margin-bottom: 50px;" placeholder="Test Title">
     
