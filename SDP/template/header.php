@@ -20,4 +20,4 @@
    body { background: #FAFAFA !important; }
 </style>
 
-<script src="javascripts/main.js"></script>
+<script src="template/main.js"></script>

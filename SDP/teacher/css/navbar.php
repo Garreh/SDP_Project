@@ -1,4 +1,5 @@
-<?php session_start();
+<?php 
+session_start();
 ?>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark pt-3 pb-3 " style="background-color:#3A3837;font-family:Roboto;">
   <a class="navbar-brand" href="#">History</a>
@@ -43,14 +44,13 @@
         </div>
       </div>
     </form> 
-        <?php if(empty($_SESSION['username'])){ ?>
-      <a class="nav-link" href="/SDP/loginpage.php" style="text-decoration: none;color:#FFFFFF;">LOGIN</a>
-      <a href="/SDP/signuppage.php" class="btn btn-danger btn-rounded">SIGN UP</a>
+        <?php if(empty($_SESSION['teacher'])){ ?>
+      <a class="nav-link" href="/SDP/login_page.php" style="text-decoration: none;color:#FFFFFF;">LOGIN</a>
+      <a href="/SDP/signup_page.php" class="btn btn-danger btn-rounded">SIGN UP</a>
     <?php }else{ ?>
-      <button type="button" name="button" class="btn btn-danger btn-rounded" onclick="logout()">LOGOUT</button>
+      <button type="button" name="button" class="btn btn-danger btn-rounded" onclick="location.href='../logout.php'">LOGOUT</button>
     <?php } ?>
 
   </div>
 
 </nav>
-<script type="text/javascript" src="/SDP/javascripts/main.js"></script>

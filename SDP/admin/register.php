@@ -18,15 +18,15 @@
                 $sql = "INSERT INTO admin (admin_username,admin_password) VALUES('$username','".md5($password)."')";
                 mysqli_query($conn,$sql);
 
-                if(mysqli_affected_rows($conn))
+                if(mysqli_affected_rows($conn)<=0)
                 {
-                    echo "<script>alert('You have registered as admin')</script>";
-                    echo "<script>window.location.href='admin_login.php'</script>";
+					echo "<script>alert('Registration failed')</script>";
+                    die("<script>window.history.go(-1)</script>");
                 }
                 else
                 {
-                    echo "<script>alert('Registration failed')</script>";
-                    die("<script>window.history.go(-1)</script>");
+                    echo "<script>alert('You have registered as admin')</script>";
+                    echo "<script>window.location.href='admin_login.php'</script>";
                 }
             }
             else

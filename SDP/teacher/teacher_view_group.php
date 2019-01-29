@@ -16,6 +16,23 @@
 <?php
     $page = "group";
     include "css/navbar.php";
+    
+    if(!isset($_SESSION['teacher']))
+    {
+        echo "<script>alert('You did not login yet! Teacher')</script>";
+        die("<script>../../login_page.php</script>");
+    }
+    else
+    {
+        include "back/conn.php";
+        $teacher = $_SESSION['teacher'];
+        $query = "SELECT * FROM teacher WHERE teacher_username = '$teacher'";
+        $result = mysqli_query($conn,$query);
+        while($row = mysqli_fetch_array($result))
+        {
+            $teacher_id = $row['teacher_id'];
+        }
+    }
 ?>
 <div class="wrapper">
 <!--  Sidebar Holder -->
@@ -38,17 +55,15 @@
                         while($row = mysqli_fetch_array($result))
                         {
                             $group_id = $row['group_id'];
+                            $group_salt = $row['group_salt'];
                             $group_name = $row['group_title'];
                             echo "<div class='btn-group w-100'>";
-                            echo "<form method='post' class='w-100' action='teacher_view_group.php'>";
-                            echo "<input type='hidden' value='$group_id' name='group'/>";
-                            echo "<input type='submit' value='$group_name' style='background-color:inherit; border:none; display:inline-block; text-align:left;' class='w-75 btn btn-primary btn-block float-left nav-link'>";
+                            echo "<button style='background-color:inherit; border:none; display:inline-block; text-align:left;' class='w-75 btn btn-primary btn-block float-left nav-link' onclick=\"location.href='teacher_view_group.php?group=$group_salt'\">$group_name</button>";
                             echo "<button type='button' style='background-color:inherit; display:inline-block; border:none;' class='btn btn-primary dropdown-toggle float-right dropdown-toggle-split nav-link' data-toggle='dropdown'>";
                             echo "</button>";
                             echo "<div class='dropdown-menu'>";
-                            echo "<a class='dropdown-item' data-toggle='modal' data-target='#manageGroup'>Manage Group</a>";
+                            echo "<button type='button' class='btn dropdown-item' data-toggle='modal' data-target='#manageGroup'>Delete Group</button>";
                             echo "</div>";
-                            echo "</form>";
                             echo "</div>"; 
                         }
                     }
@@ -77,17 +92,18 @@
                         <span></span>
                     </button>
 <?php
-    if(isset($_POST['group']))
+    if(isset($_GET['group']))
     {
         include "back/conn.php";
-        $group_id = $_POST['group'];
+        $group_salt = $_GET['group'];
         
 //        First SQL
-        $sql = "SELECT * FROM private_group WHERE group_id = '$group_id'";
+        $sql = "SELECT * FROM private_group WHERE group_salt = '$group_salt' AND teacher_id = '$teacher_id'";
         $result = mysqli_query($conn,$sql);
         
         while($row = mysqli_fetch_array($result))
         {
+            $group_id = $row['group_id'];
             $title = $row['group_title'];
             echo "<h2 style=\"padding-right: 50%;\">$title</h2>";
         } 
@@ -106,10 +122,11 @@
             
  <?php 
         //        Second SQL
-                echo "<div class=\"card-body\">";
+                echo "<div class=\"card-body\" style=\"padding-bottom: 5px;\">";
                 echo "<div class=\"container-fluid scroll\" style=\"overflow: auto; max-width: 100vw; max-height: 70vh;\">";
-                
-        $sql = "SELECT * FROM post WHERE group_id = '$group_id' AND post_type= 'PRIVATE'";
+        
+        
+        $sql = "SELECT * FROM post WHERE group_id = '$group_id' AND post_type= 'PRIVATE' AND teacher_id ='$teacher_id'";
         $result = mysqli_query($conn,$sql);
         
         while($row = mysqli_fetch_array($result))
@@ -162,7 +179,7 @@
                         {
                             $student_username = $row_name['student_username'];
                             $role = "Student";
-                            echo "<h7 class=\"w-50\" style=\"display:inline-block\">$student_username </h7>";
+                            echo "<h7 class=\"w-50\" style=\"display:inline-block\">$student_username</h7>";
                             
                         }
                     }
@@ -175,6 +192,7 @@
             
                 echo "<form method=\"post\" action=\"back/add_comment.php\">";
                 echo "<input type=\"text\" class=\"form-control w-75\" style=\"display:inline-block\" name=\"comment\" placeholder=\"Enter Comment...\" required=\"required\"/>";
+                echo "<input type=\"hidden\" value='$group_salt' name='group_salt'/>";
                 echo "<input type=\"hidden\" value='$post_id' name='post_id'/>";
                 echo "<input type=\"submit\" class=\"btn btn-info\" style=\"margin-left: 2vh;\" name=\"submit\" value=\"Comment\"/>";
                 echo "</form></div></div></div>";  
@@ -183,7 +201,7 @@
         
                 echo "</div></div>";
         ?>
-             <div class="card-footer">
+             <div class="card-footer" style="padding-top: 5px; padding-bottom: 5px;">
                     <center>
                     <div class="row">
                         <div class="col-4">
@@ -217,6 +235,34 @@
 </div>
     
     <!-- //////////////////// MODAL BOX SECTION /////////////////// -->
+    
+            <!-- Manage Group Modal -->
+            <div class="modal fade" id="manageGroup">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Enter the Group Name to Delete</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <form method="post" action="back/delete_group.php">
+                    <div class="modal-body">
+                        <input type="hidden" name="group_id" value="<?php echo $group_id ?>"/>
+                        <input type="text" class="form-control" required="required" name="delete" placeholder="Please Enter Confirmation..."/>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <input type="submit" name="submit" class="btn btn-success mx-auto" value="Delete Group"/>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+    
             <!-- Create Group Modal -->
               <div class="modal fade" id="createModal">
                 <div class="modal-dialog">
@@ -231,7 +277,7 @@
                     <!-- Modal body -->
                     <form method="post" action="back/create_group.php">
                     <div class="modal-body">
-                        
+                       <?php echo "<input type=\"hidden\" value='$group_salt' name='group_salt'/>"; ?>
                             <label>Group Name</label><br/>
                             <input type="text" name="group_name" class="form-control" placeholder="Enter Desired Group Name..." required="required"/><br/>
                             <label>Group Description</label><br/>
@@ -249,7 +295,7 @@
               </div>
     
     <?php
-    if(isset($_POST['group']))
+    if(isset($_GET['group']))
     {
         ?>
                     <!-- Add Post Modal -->
@@ -266,7 +312,8 @@
                             <!-- Modal body -->
                             <div class="modal-body">
                             <form method="post" action="back/add_group_post.php">
-                                <input type="hidden" name="group_id" value="<?php echo $_POST['group'] ?>"/>
+                                <?php echo "<input type=\"hidden\" value='$group_salt' name='group_salt'/>"; ?>
+                                <input type="hidden" name="group_id" value="<?php echo $group_id ?>"/>
                                 <input type="text" name="post_title" class="form-control" placeholder="Enter Post Title..." required="required"/><br/>
                                 <textarea class="form-control" name="post_description" required="required" placeholder="Enter Post Description"></textarea><br/>
                                 <center>
@@ -308,7 +355,7 @@
                                 <?php
                                     include "back/conn.php";
                                     $sql = "SELECT * FROM student INNER JOIN student_group ON student.student_id = student_group.student_id ".
-                                        "INNER JOIN private_group ON student_group.group_id = private_group.group_id";
+                                        "INNER JOIN private_group ON student_group.group_id = private_group.group_id WHERE private_group.group_id = '$group_id'";
                                     $result = mysqli_query($conn,$sql);
                                     while($row = mysqli_fetch_array($result))
                                     {
@@ -350,11 +397,12 @@
                                 <h4 class="modal-title">Add Member</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-
+                        
                             <!-- Modal body -->
                             <div class="modal-body">
                             <form method="post" action="back/add_group_member.php">
-                                <input type="hidden" name="group_id" value="<?php echo $_POST['group'] ?>"/>    
+                                <?php echo "<input type=\"hidden\" value='$group_salt' name='group_salt'/>"; ?>
+                                <input type="hidden" name="group_id" value="<?php echo $group_id ?>"/>    
                                 <input type="text" name="member_email" class="form-control" placeholder="Enter Member Email..."/><br/>
                                 <center>
                                 <input type="submit" name="submit" class="btn btn-success" value="Add Member"/>

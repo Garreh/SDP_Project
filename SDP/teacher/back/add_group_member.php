@@ -1,11 +1,29 @@
 <?php
-
-if(isset($_POST['group_id']) && isset($_POST['member_email']))
+session_start();
+if(!isset($_SESSION['teacher']))
+{
+    echo "<script>alert('You did not login yet! Teacher')</script>";
+    die("<script>../../login_page.php</script>");
+}
+else
+{
+    include "conn.php";
+    $teacher = $_SESSION['teacher'];
+    $query = "SELECT * FROM teacher WHERE teacher_username = '$teacher'";
+    $result = mysqli_query($conn,$query);
+    while($row = mysqli_fetch_array($result))
+    {
+        $teacher_id = $row['teacher_id'];
+    }
+}
+   
+if(isset($_POST['group_id']) && isset($_POST['member_email']) && isset($_POST['group_salt']))
 {
     include "conn.php";
     
     $group_id = $_POST['group_id'];
     $member_email = $_POST['member_email'];
+    $group_salt = $_POST['group_salt'];
     
     $sql_member = "SELECT * FROM student WHERE student_email = '$member_email'";
     $member_result = mysqli_query($conn,$sql_member);
@@ -13,7 +31,7 @@ if(isset($_POST['group_id']) && isset($_POST['member_email']))
     if(mysqli_num_rows($member_result)<=0)
     {
         echo "<script>alert('The student doesnt\' exist!!!')</script>";
-        echo "<script>window.location.href='../teacher_view_group.php'</script>";
+        echo "<script>window.history.go(-1)</script>";
     }
     else
     {
@@ -25,17 +43,17 @@ if(isset($_POST['group_id']) && isset($_POST['member_email']))
         mysqli_query($conn,$sql);
         if(mysqli_affected_rows($conn)<=0)
         {
-            echo "<script>window.location.href='../teacher_view_group.php'</script>";
+            echo "<script>window.history.go(-1)</script>";
         }
         else
         {
-            echo "<script>window.location.href='../teacher_view_group.php'</script>";
+            echo "<script>window.location.href='../teacher_view_group.php?group=$group_salt'</script>";
         }
     }
 }
 else
 {
-    echo "<script>window.location.href='../teacher_view_group.php'</script>";
+    echo "<script>window.history.go(-1)</script>";
 }
 
 ?>

@@ -3,8 +3,13 @@
 
     <!-- Footer Elements -->
     <div class="container">
-      <?php if(isset($_SESSION['username'])){ ?>
-        <a href="#!" class="btn btn-danger btn-rounded" onclick="">LOGOUT</a>
+      <?php if(isset($_SESSION['teacher'])){ ?>
+        <center>
+        <p class="text-primary" style="display:inline-block; font-size:24px;">Welcome Back! Teacher </p>
+        <strong>
+            <p class="text-muted" style="display:inline-block; text-decoration:underline; font-size:24px;"><?php echo $_SESSION['teacher'] ?></p>
+        </strong>
+        </center>
       <?php }else{ ?>
         <ul class="list-unstyled list-inline text-center py-2">
           <li class="list-inline-item">

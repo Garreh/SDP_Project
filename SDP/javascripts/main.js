@@ -1,65 +1,3 @@
-//
-// function adminlogin(){
-//   var username = $("#inputUsername").val().trim();
-//   var password = $("#inputPassword").val().trim();
-//   if (username == "") {
-//     $('#errmsg').text('Please enter all needed details!')
-//     return;
-//   }
-//
-//   if (password == "") {
-//     $('#errmsg').text('Please enter all needed details!')
-//     return;
-//   }
-//   if( username != "" && password != "" ){
-//       $.ajax({
-//           url:'/SDP/modules/sessions/adminlogin.php',
-//           type:'post',
-//           data:{username:username,password:password},
-//           success:function(response){
-//               var msg = "";
-//               if(response == 1){
-//                   window.location = "/SDP/public/admin/adminmenu.php";
-//               }else{
-//                   $('#errmsg').text('Username/Password is Incorrect!');
-//               }
-//           }
-//       });
-//   }
-// }
-
-
-
-function adminlogin(){
-  var username = $("#inputUsername3").val().trim();
-  var password = $("#inputPassword3").val().trim();
-  if (username == "") {
-    $('#errmsg').text('Please enter all needed details!')
-    return;
-  }
-
-  if (password == "") {
-    $('#errmsg').text('Please enter all needed details!')
-    return;
-  }
-  if( username != "" && password != "" ){
-      $.ajax({
-          url:'/SDP/modules/sessions/adminlogin.php',
-          type:'post',
-          data:{username:username,password:password},
-          success:function(response){
-              var msg = "";
-              if(response == 1){
-                  window.location = "/SDP/public/admin/adminmenu.php";
-              }else{
-                  $('#errmsg').text('Username/Password is Incorrect!');
-              }
-          }
-      });
-  }
-}
-
-
 function stdlogin(){
   var username = $("#inputUsername").val().trim();
   var password = $("#inputPassword").val().trim();
@@ -89,7 +27,34 @@ function stdlogin(){
   }
 }
 
+function adminlogin(){
+  var username = $("#inputUsername").val().trim();
+  var password = $("#inputPassword").val().trim();
+  if (username == "") {
+    $('#errmsg').text('Please enter all needed details!')
+    return;
+  }
 
+  if (password == "") {
+    $('#errmsg').text('Please enter all needed details!')
+    return;
+  }
+  if( username != "" && password != "" ){
+      $.ajax({
+          url:'/SDP/modules/sessions/adminlogin.php',
+          type:'post',
+          data:{username:username,password:password},
+          success:function(response){
+              var msg = "";
+              if(response == 1){
+                  window.location = "/SDP/public/admin/adminmenu.php";
+              }else{
+                  $('#errmsg').text('Username/Password is Incorrect!');
+              }
+          }
+      });
+  }
+}
 
 function tchlogin(){
   var username = $("#inputUsername2").val().trim();
@@ -138,8 +103,6 @@ function studentlog(){
   document.getElementById('tchlog').style.display = 'none';
   document.getElementById('teacherbtn').style.backgroundColor = '#3A3837';
   document.getElementById('teacherbtn').style.color = '#FFFFFF';
-
-
 }
 
 function teacherlog(){
@@ -149,5 +112,4 @@ function teacherlog(){
   document.getElementById('stdlog').style.display = 'none';
   document.getElementById('studentbtn').style.backgroundColor = '#3A3837';
   document.getElementById('studentbtn').style.color = '#FFFFFF';
-  document.getElementById('errmsg').text="";
 }

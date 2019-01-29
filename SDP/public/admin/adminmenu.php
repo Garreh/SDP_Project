@@ -41,11 +41,32 @@
   </head>
   <body>
     <?php include('../../template/navbar.php');?>
-    <div class="" style="height:900px; background-color:#F2E4B9; padding-top:5%;">
+    <div class="" style="height:900px; background-color:#F4F4F4; padding-top:5%;">
+      <center>
+        <div class="container pt-5">
+          <div class="row justify-content-around">
+            <div class="col">
+              <a href="adminaddteacher.php">
+                <img src="../../img/like.png" class="rounded" alt="..." style="  width: 246.13px; height: 246.13px;" >
+              </a>
+               <br>
+               <a href="adminaddteacher.php">
+                 <button type="button" class="button mt-5" style="width:200px">Create New Teacher</button>
+               </a>
 
+            </div>
+            <div class="col">
+              <a href="#">
+                <img src="../../img/like.png" class="rounded" alt="..." style="  width: 246.13px; height: 246.13px;" >
+              </a>
+               <br>
+               <button type="button" class="button mt-5" style="width:200px">Edit or Delete</button>
+            </div>
+          </div>
+        </div>
+      </center>
     </div>
   </body>
     <?php include('../../template/footer.php');?>
     <script type="text/javascript" src="/SDP/javascripts/main.js"></script>
-
 </html>

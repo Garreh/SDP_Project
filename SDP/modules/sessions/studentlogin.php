@@ -15,12 +15,7 @@ if ($username != "" && $password != ""){
 
     if($count > 0){
         $_SESSION['username'] = $username;
-        $_SESSION['student_id'] = $data['student_id'];
-        $_SESSION['student_email'] = $data['student_email'];
-        $_SESSION['fname'] = $data['first_name'];
-        $_SESSION['lname'] = $data['last_name'];
-        $_SESSION['start'] = time();	//set the start time to the login moment
-        $_SESSION['expire'] = $_SESSION['start'] + (60 * 60); //set the time limit for login
+
         echo 1;
     }else{
         echo 0;
