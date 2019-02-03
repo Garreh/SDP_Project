@@ -7,7 +7,7 @@ include  "conn.php";
 
 
 $teacher_username = mysqli_real_escape_string($conn, $_POST['teacher_username']);
-$teacher_email = $_POST['teacher_email'];
+$teacher_email =  mysqli_real_escape_string($conn,$_POST['teacher_email'];
 $first_name = mysqli_real_escape_string($conn,$_POST['first_name']);
 $last_name = mysqli_real_escape_string($conn,$_POST['last_name']);
 
