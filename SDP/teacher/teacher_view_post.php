@@ -2,7 +2,7 @@
 <html>
     
 <head>
-    <title>Create Quiz</title>
+    <title>Post Listing</title>
     <?php
     include "css/header.php";  
     ?>
@@ -11,7 +11,7 @@
 <body>
 <?php
     include "back/conn.php";
-    $page = "group";
+    $page = "post";
     include "css/navbar.php";
     
     if(!isset($_SESSION['teacher']))
