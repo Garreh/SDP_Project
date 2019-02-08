@@ -42,7 +42,7 @@
     if(!isset($_SESSION['teacher']))
     {
         echo "<script>alert('You did not login yet! Teacher')</script>";
-        die("<script>../../login_page.php</script>");
+        die("<script>window.location.href='../login_page.php'</script>");
     }
     else
     {

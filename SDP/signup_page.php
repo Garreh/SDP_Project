@@ -118,7 +118,7 @@
           <div class="form-group row justify-content-center">
             <div class="col-sm-4 ">
               <label for="" style="float:left;">Password:</label>
-              <input type="password" id="password" required="required" name="psw" class="form-control" placeholder="Password">
+              <input type="password" id="password" maxlength="12" required="required" name="psw" class="form-control" placeholder="Password">
             </div>
           </div>
           <div class="form-group row justify-content-center">
@@ -136,7 +136,7 @@
                     $date2 = date("Y-m-d",$value);
                 ?>
               <label for="" style="float:left;">Date of Birth:</label>
-              <input type="date" name="dob" max="<?php echo $date ?>" value="<?php echo $date2 ?>" required="required" class="form-control" placeholder="Date of Birth">
+              <input type="date" name="dob" max="<?php echo $date ?>" value="<?php echo $date2 ?>" required="required" class="form-control"/>
             </div>
           </div>
             <span id="result"></span>

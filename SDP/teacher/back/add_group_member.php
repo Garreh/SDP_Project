@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['teacher']))
 {
     echo "<script>alert('You did not login yet! Teacher')</script>";
-    die("<script>../../login_page.php</script>");
+    die("<script>window.location.href='../../login_page.php'</script>");
 }
 else
 {
@@ -17,13 +17,12 @@ else
     }
 }
    
-if(isset($_POST['group_id']) && isset($_POST['member_email']) && isset($_POST['group_salt']))
+if(isset($_POST['group_id']) && isset($_POST['member_email']))
 {
     include "conn.php";
     
     $group_id = $_POST['group_id'];
     $member_email = $_POST['member_email'];
-    $group_salt = $_POST['group_salt'];
     
     $sql_member = "SELECT * FROM student WHERE student_email = '$member_email'";
     $member_result = mysqli_query($conn,$sql_member);
@@ -47,7 +46,7 @@ if(isset($_POST['group_id']) && isset($_POST['member_email']) && isset($_POST['g
         }
         else
         {
-            echo "<script>window.location.href='../teacher_view_group.php?group=$group_salt'</script>";
+            echo "<script>window.location.href='../teacher_view_group.php?group=$group_id'</script>";
         }
     }
 }

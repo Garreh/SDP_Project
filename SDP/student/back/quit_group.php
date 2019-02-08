@@ -1,23 +1,21 @@
 <?php
-    
+session_start();
+if(!isset($_SESSION['student']))
+{
+    echo "<script>alert('You did not login yet! Student')</script>";
+    die("<script>../../login_page.php</script>");
+}
+else
+{
     include "conn.php";
-
-    session_start();
-    if(!isset($_SESSION['teacher']))
+    $student = $_SESSION['student'];
+    $query = "SELECT * FROM student WHERE student_username = '$student'";
+    $result = mysqli_query($conn,$query);
+    while($row = mysqli_fetch_array($result))
     {
-        echo "<script>alert('You did not login yet! Teacher')</script>";
-        die("<script>../../login_page.php</script>");
+        $student_id = $row['student_id'];
     }
-    else
-    {
-        $teacher = $_SESSION['teacher'];
-        $query = "SELECT * FROM teacher WHERE teacher_username = '$teacher'";
-        $result = mysqli_query($conn,$query);
-        while($row = mysqli_fetch_array($result))
-        {
-            $teacher_id = $row['teacher_id'];
-        }
-    }
+}
 
     if(isset($_POST['group_id']) && isset($_POST['delete']))
     {
@@ -40,10 +38,10 @@
         }
         else if($crudential == $group_name)
         {
-            $sql = "DELETE FROM private_group WHERE group_id = '$group_id'";
+            $sql = "DELETE FROM student_group WHERE group_id = '$group_id' AND student_id = '$student_id'";
             $result = mysqli_query($conn,$sql);
-            echo "<script>alert('Group Deleted')</script>";
-            echo "<script>window.location.href='../teacher_view_group.php'</script>";
+            echo "<script>alert('You have quitted from the group')</script>";
+            echo "<script>window.location.href='../student_view_group.php'</script>";
         }
     }
 ?>

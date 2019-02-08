@@ -4,7 +4,7 @@ session_start();
 if(!isset($_SESSION['teacher']))
 {
     echo "<script>alert('You did not login yet! Teacher')</script>";
-    die("<script>../../login_page.php</script>");
+    die("<script>window.location.href='../../login_page.php'</script>");
 }
 else
 {
@@ -17,7 +17,7 @@ else
     }
 }
    
-    if(isset($_POST['post_title']) && isset($_POST['post_description']) && isset($_POST['group_id']) && isset($_POST['group_salt']))
+    if(isset($_POST['post_title']) && isset($_POST['post_description']) && isset($_POST['group_id']))
     {
         
         
@@ -27,7 +27,6 @@ else
         date_default_timezone_set('Asia/Kuala_Lumpur');
         $post_date = date("Y-m-d");
         $group_id = $_POST['group_id'];
-        $group_salt = $_POST['group_salt'];
         
         $sql = "INSERT INTO post (post_title,post_description,post_type,post_date,teacher_id,group_id) VALUES ('$post_title','$post_description','$post_type','$post_date','$teacher_id','$group_id')";
         mysqli_query($conn,$sql);
@@ -37,7 +36,7 @@ else
         }
         else
         {
-            echo "<script>window.location.href='../teacher_view_group.php?group=$group_salt'</script>";
+            echo "<script>window.location.href='../teacher_view_group.php?group=$group_id'</script>";
         }
     }
 

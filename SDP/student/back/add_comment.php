@@ -1,19 +1,19 @@
 <?php
 session_start();
-if(!isset($_SESSION['teacher']))
+if(!isset($_SESSION['student']))
 {
-    echo "<script>alert('You did not login yet! Teacher')</script>";
+    echo "<script>alert('You did not login yet! Student')</script>";
     die("<script>../../login_page.php</script>");
 }
 else
 {
     include "conn.php";
-    $teacher = $_SESSION['teacher'];
-    $query = "SELECT * FROM teacher WHERE teacher_username = '$teacher'";
+    $student = $_SESSION['student'];
+    $query = "SELECT * FROM student WHERE student_username = '$student'";
     $result = mysqli_query($conn,$query);
     while($row = mysqli_fetch_array($result))
     {
-        $teacher_id = $row['teacher_id'];
+        $student_id = $row['student_id'];
     }
 }
 if(isset($_POST['comment'])&&isset($_POST['post_id'])&&isset($_POST['group_id']))
@@ -25,7 +25,7 @@ if(isset($_POST['comment'])&&isset($_POST['post_id'])&&isset($_POST['group_id'])
     $date = date("Y-m-d H:i:s"); 
     $group_id = $_POST['group_id'];
     
-    $sql = "INSERT INTO comment (comment,comment_datetime,teacher_id,post_id) VALUES ('$comment','$date','$teacher_id','$post_id')";
+    $sql = "INSERT INTO comment (comment,comment_datetime,student_id,post_id) VALUES ('$comment','$date','$student_id','$post_id')";
     mysqli_query($conn,$sql);
     
     if(mysqli_affected_rows($conn)<=0)
@@ -35,7 +35,7 @@ if(isset($_POST['comment'])&&isset($_POST['post_id'])&&isset($_POST['group_id'])
     else
     {
         
-        echo "<script>window.location.href='../teacher_view_group.php?group=$group_id'</script>";
+        echo "<script>window.location.href='../student_view_group.php?group=$group_id'</script>";
     }
 }
 ?>

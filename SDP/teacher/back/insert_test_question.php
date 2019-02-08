@@ -17,21 +17,20 @@
         }
     }
 
-    if(isset($_POST['question']) && isset($_POST['correct']) && isset($_POST['ans']) && isset($_POST['quiz_id']))
+    if(isset($_POST['question']) && isset($_POST['correct']) && isset($_POST['ans']) && isset($_POST['test_id']))
     {
         include "conn.php";
-        $total = count($_POST['question']);
         $question = $_POST['question'];
         $ans_correct = $_POST['correct'];
         $ans = $_POST['ans'];
-        $quiz_id = $_POST['quiz_id'];
+        $test_id = $_POST['test_id'];
         
         $a = 1;
-        for($i = 1; $i<=$total; $i++)
+        for($i = 1; $i<=40; $i++)
         {
-            $sql_q = "INSERT INTO question(question_topic, quiz_id) VALUES ('$question[$i]', '$quiz_id')";
+            $sql_q = "INSERT INTO question(question_topic, test_id) VALUES ('$question[$i]', '$test_id')";
             mysqli_query($conn,$sql_q);
-            $sql_q_id = "SELECT * FROM question WHERE question_topic = '$question[$i]' AND quiz_id= '$quiz_id'";
+            $sql_q_id = "SELECT * FROM question WHERE question_topic = '$question[$i]' AND test_id= '$test_id'";
             $result_id = mysqli_query($conn,$sql_q_id);
             while($row = mysqli_fetch_array($result_id))
             {
@@ -49,17 +48,16 @@
             }
             $a+=3;
             
+        }
             if(mysqli_affected_rows($conn)<=0)
             {
-                echo "<script>alert('Quiz Question Insertion Failed')</script>";
+                echo "<script>alert('Test Question Insertion Failed')</script>";
                 die("<script>window.history.go(-1)</script>");
             }
             else
             {
-                echo "<script>window.location.href='../teacher_create_quiz.php'</script>";
+                echo "<script>window.location.href='../teacher_create_test.php'</script>";
             }
-            
-        }
             
     }
     else

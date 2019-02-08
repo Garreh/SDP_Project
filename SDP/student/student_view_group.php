@@ -4,7 +4,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/group.css"/>      
 <?php
-  include "css/header.php";  
+    include "css/header.php";  
 ?>
 <title>Private Groups</title> 
 
@@ -17,20 +17,20 @@
     $page = "group";
     include "css/navbar.php";
     
-    if(!isset($_SESSION['teacher']))
+    if(!isset($_SESSION['student']))
     {
-        echo "<script>alert('You did not login yet! Teacher')</script>";
+        echo "<script>alert('You did not login yet! Student')</script>";
         die("<script>window.location.href='../login_page.php'</script>");
     }
     else
     {
         include "back/conn.php";
-        $teacher = $_SESSION['teacher'];
-        $query = "SELECT * FROM teacher WHERE teacher_username = '$teacher'";
+        $student = $_SESSION['student'];
+        $query = "SELECT * FROM student WHERE student_username = '$student'";
         $result = mysqli_query($conn,$query);
         while($row = mysqli_fetch_array($result))
         {
-            $teacher_id = $row['teacher_id'];
+            $student_id = $row['student_id'];
         }
     }
 ?>
@@ -44,7 +44,7 @@
             <ul class="list-unstyled components">
                 <?php
                     include "back/conn.php";
-                    $sql = "SELECT * FROM private_group WHERE teacher_id = 1 ORDER BY group_id";
+                    $sql = "SELECT * FROM private_group INNER JOIN student_group ON private_group.group_id = student_group.group_id WHERE student_group.student_id = '$student_id'";
                     $result = mysqli_query($conn,$sql);
                     if(mysqli_num_rows($result)<=0)
                     {
@@ -57,25 +57,18 @@
                             $group_id = $row['group_id'];
                             $group_name = $row['group_title'];
                             echo "<div class='btn-group w-100'>";
-                            echo "<button style='background-color:inherit; border:none; display:inline-block; text-align:left;' class='w-75 btn btn-primary btn-block float-left nav-link' onclick=\"location.href='teacher_view_group.php?group=$group_id'\">$group_name</button>";
+                            echo "<button style='background-color:inherit; border:none; display:inline-block; text-align:left;' class='w-75 btn btn-primary btn-block float-left nav-link' onclick=\"location.href='student_view_group.php?group=$group_id'\">$group_name</button>";
                             echo "<button type='button' style='background-color:inherit; display:inline-block; border:none;' class='btn btn-primary dropdown-toggle float-right dropdown-toggle-split nav-link' data-toggle='dropdown'>";
                             echo "</button>";
                             echo "<div class='dropdown-menu'>";
-                            echo "<button type='button' class='btn dropdown-item' data-toggle='modal' data-target='#manageGroup".$group_id."'>Delete Group</button>";
+                            echo "<button type='button' class='btn dropdown-item' data-toggle='modal' data-target='#quitGroup".$group_id."'>Quit Group</button>";
                             echo "</div>";
                             echo "</div>"; 
                         }
                     }
                 ?>               
             </ul>
-<center>
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <span id="modalResult"></span>
-                   <button type="button" class="btn btn-primary form-control-range" data-toggle="modal" data-target="#createModal">Create Group</button> 
-                </li>
-            </ul>
-  </center>          
+        
             
         </nav>
     
@@ -97,11 +90,11 @@
         $group_id = $_GET['group'];
         
 //        First SQL
-        $sql = "SELECT * FROM private_group WHERE group_id = '$group_id' AND teacher_id = '$teacher_id'";
+        $sql = "SELECT * FROM private_group INNER JOIN student_group ON private_group.group_id = student_group.group_id WHERE private_group.group_id = '$group_id' AND student_group.student_id = '$student_id'";
         $result = mysqli_query($conn,$sql);
         if(mysqli_num_rows($result)<=0)
         {
-            echo "<h2 style='margin-right: 35%;'>There is no such private group</h2>";
+            echo "<h2 style='margin-right: 35%;'>You are not a member of the group</h2>";
         }
         else
         {
@@ -130,7 +123,7 @@
                 echo "<div class=\"container-fluid scroll\" style=\"overflow: auto; max-width: 100vw; max-height: 70vh;\">";
         
         
-        $sql = "SELECT * FROM post WHERE group_id = '$group_id' AND post_type= 'PRIVATE' AND teacher_id ='$teacher_id'";
+        $sql = "SELECT * FROM post p INNER JOIN student_group sg ON p.group_id = sg.group_id WHERE sg.group_id = '$group_id' AND p.post_type = 'PRIVATE' AND sg.student_id = '$student_id'";
         $result = mysqli_query($conn,$sql);
         
         while($row = mysqli_fetch_array($result))
@@ -139,7 +132,6 @@
             $post_title = $row['post_title'];
             $post_description = $row['post_description'];
             $post_date = $row['post_date'];
-            
             
                 echo "<div class=\"card bg-light text-dark\" style=\"height: 60vh; margin-bottom: 6vh;\">";
                 echo "<div class=\"card-body\" style=\"max-height: 65vh;\">";
@@ -204,25 +196,18 @@
         }
         
                 echo "</div></div>";
+            
         ?>
-             <div class="card-footer" style="padding-top: 5px; padding-bottom: 5px;">
+                <div class="card-footer" style="padding-top: 5px; padding-bottom: 5px;">
                     <center>
-                    <div class="row">
-                        <div class="col-4">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createPost">Create Post</button>
-                        </div>
-                        <div class="col-4">
+                    <div class="row max_auto">  
+                        <div class="col">
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#memberList">Member List</button>
-                        </div>
-                        <div class="col-4">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addMember">Add Member</button>
-                        </div>
+                        </div>                        
                     </div>
-                    </center>
-                    
-                </div>   
-        <?php           
-        
+                    </center>  
+                </div> 
+        <?php
         }
     }
     else
@@ -240,10 +225,10 @@
     
     <!-- //////////////////// MODAL BOX SECTION /////////////////// -->
     
-            <!-- Manage Group Modal -->
+            <!-- Quit Group Modal -->
     
             <?php
-            $query = "SELECT * FROM private_group WHERE teacher_id = '$teacher_id'";
+            $query = "SELECT * FROM private_group INNER JOIN student_group ON private_group.group_id = student_group.group_id WHERE student_group.student_id = '$student_id'";
             $q_result = mysqli_query($conn,$query);
                 
             while($row = mysqli_fetch_array($q_result))
@@ -251,18 +236,18 @@
                 $g_id = $row['group_id'];
             
             ?>
-            <div class='modal fade' id='manageGroup<?php echo $g_id ?>'>
+            <div class='modal fade' id='quitGroup<?php echo $g_id ?>'>
                 <div class='modal-dialog'>
                   <div class='modal-content'>
 
                     <!-- Modal Header -->
                     <div class='modal-header'>
-                      <h4 class='modal-title'>Enter the Group Name to Delete</h4>
+                      <h4 class='modal-title'>Enter the Group Name to Quit</h4>
                       <button type='button' class='close' data-dismiss='modal'>&times;</button>
                     </div>
 
                     <!-- Modal body -->
-                    <form method='post' action='back/delete_group.php'>
+                    <form method='post' action='back/quit_group.php'>
                     <div class='modal-body'>
                         <input type='hidden' name='group_id' value='<?php echo $g_id ?>'/>
                         <input type='text' class='form-control' required='required' name='delete' placeholder='Please Enter Confirmation...'/>
@@ -270,79 +255,18 @@
 
                     <!-- Modal footer -->
                     <div class='modal-footer'>
-                      <input type='submit' name='submit' class='btn btn-success mx-auto' value='Delete Group'/>
+                      <input type='submit' name='submit' class='btn btn-success mx-auto' value='Quit Group'/>
                     </div>
                     </form>
                   </div>
                 </div>
               </div>
             <?php } ?>
-            <!-- Create Group Modal -->
-              <div class="modal fade" id="createModal">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                      <h4 class="modal-title">Create New Group</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <form method="post" action="back/create_group.php">
-                    <div class="modal-body">
-                            <input type="hidden" name="group_id" value="<?php echo $group_id ?>"/>
-                            <label>Group Name</label><br/>
-                            <input type="text" name="group_name" class="form-control" placeholder="Enter Desired Group Name..." required="required"/><br/>
-                            <label>Group Description</label><br/>
-                            <textarea name="group_description" class="form-control" placeholder="Enter Group Description..." required="required"></textarea><br/>   
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                      <input type="submit" name="submit" class="btn btn-success mx-auto" value="Create Group"/>
-                    </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
     
     <?php
     if(isset($_GET['group']))
     {
         ?>
-                    <!-- Add Post Modal -->
-                <div class="modal fade" id="createPost">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Create New Post</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                            <form method="post" action="back/add_group_post.php">
-                                
-                                <input type="hidden" name="group_id" value="<?php echo $group_id ?>"/>
-                                <input type="text" name="post_title" class="form-control" placeholder="Enter Post Title..." required="required"/><br/>
-                                <textarea class="form-control" name="post_description" required="required" placeholder="Enter Post Description"></textarea><br/>
-                                <center>
-                                <input type="submit" class="btn btn-success w-50" value="Create Post" name="submit"/>
-                                </center>
-                            </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
     
     <!-- //////////////////////////////////////////////////////////// -->
     
@@ -359,6 +283,22 @@
 
                             <!-- Modal body -->
                             <div class="modal-body">
+                                <?php
+                                    $teacher_sql = "SELECT * FROM private_group WHERE group_id = '$group_id'";
+                                    $result_teacher = mysqli_query($conn,$teacher_sql);
+                                    while($rows = mysqli_fetch_array($result_teacher))
+                                    {
+                                        $teacher_id = $rows['teacher_id'];
+                                        $uname_sql = "SELECT * FROM teacher WHERE teacher_id = '$teacher_id'";
+                                        $uname_result = mysqli_query($conn,$uname_sql);
+                                        while($row_uname = mysqli_fetch_array($uname_result))
+                                        {
+                                            $teacher_username = $row_uname['teacher_username'];
+                                        }
+                                    }
+                                echo "<h2>Teacher: <strong>$teacher_username</strong></h2>";
+                                ?>
+                                
                             <table border="1px" class="w-100">
                                 <tr>
                                     <th>Username</th>
@@ -366,7 +306,7 @@
                                     <th>Full Name</th>
                                 </tr>
                                 <?php
-                                    include "back/conn.php";
+                                  
                                     $sql = "SELECT * FROM student INNER JOIN student_group ON student.student_id = student_group.student_id ".
                                         "INNER JOIN private_group ON student_group.group_id = private_group.group_id WHERE private_group.group_id = '$group_id'";
                                     $result = mysqli_query($conn,$sql);
@@ -398,38 +338,6 @@
                     </div>
                 </div>
     
-    <!-- //////////////////////////////////////////////////////////// -->
-    
-                <!-- Add Member Modal -->
-                <div class="modal fade" id="addMember">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Add Member</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                        
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                            <form method="post" action="back/add_group_member.php">
-                                <input type="hidden" name="group_id" value="<?php echo $group_id ?>"/>    
-                                <input type="text" name="member_email" class="form-control" placeholder="Enter Member Email..."/><br/>
-                                <center>
-                                <input type="submit" name="submit" class="btn btn-success" value="Add Member"/>
-                                </center>
-                            </form>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
     <?php
     }
     ?>
