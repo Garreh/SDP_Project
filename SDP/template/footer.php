@@ -16,7 +16,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3" style="color:#FFFFFF;">© 2019 Copyright:
-      <a href=""> IMRAN's Group.com</a>
+      <a href="discover.php"> IMRAN's Group.com</a>
     </div>
     <!-- Copyright -->
 

@@ -7,7 +7,7 @@
   </head>
   <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark pt-3 pb-3 " style="background-color:#3A3837;">
-      <a class="navbar-brand " href="/SDP">History</a>
+      <a class="navbar-brand " href="home_page.php">History</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -39,7 +39,7 @@
           </div>
           <div class="form-group row justify-content-center">
             <div class="col-sm-4">
-              <input type="password" name="psw" class="form-control" id="inputPassword" placeholder="Password">
+              <input type="password" name="psw" maxlength="12" class="form-control" id="inputPassword" placeholder="Password">
             </div>
           </div>
           <div class="form-group row justify-content-center">
@@ -81,7 +81,7 @@
           </div>
           <div class="form-group row justify-content-center">
             <div class="col-sm-4">
-              <input type="password" name="psw" class="form-control" id="inputPassword2" placeholder="Password">
+              <input type="password" name="psw" maxlength="12" class="form-control" id="inputPassword2" placeholder="Password">
             </div>
           </div>
           <div class="form-group row justify-content-center">

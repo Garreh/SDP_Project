@@ -29,6 +29,11 @@
             $teacher_id = $row['teacher_id'];
         }
     }
+    
+    if(isset($_GET['test_id']) && isset($_GET['post_id']))
+    {
+        $test_id = $_GET['test_id'];
+        $post_id = $_GET['post_id'];
 ?>
 
 <div class="container-fluid w-75" style="margin-top:1%; margin-bottom:15%;">
@@ -37,7 +42,7 @@
         <div class="card-body">
         <form method="post" action="back/insert_test_question.php">
             <div class="container-fluid" id="dynamic_field">
-            <input type="hidden" name="test_id" value="1"/>
+            <input type="hidden" name="test_id" value="<?php echo $test_id ?>"/>
             <?php 
                 
             $b = 1;
@@ -78,6 +83,7 @@
         </div>
     </div>
 </div>
+<?php } ?>
 <?php include "css/footer.php" ?>   
 </body>    
     

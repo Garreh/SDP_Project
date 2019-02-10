@@ -18,16 +18,13 @@
               <button type="button" style="background-color:inherit; border:none;" class="btn btn-primary dropdown-toggle dropdown-toggle-split nav-link" data-toggle="dropdown">
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="student_view_accessed_post.php">Accessed</a>
-                <a class="dropdown-item" href="student_view_result.php">My Result</a>
+                <a class="dropdown-item <?php echo ($page == "accessed" ? "active" : "")?>" href="student_view_accessed_post.php">Accessed</a>
+                <a class="dropdown-item <?php echo ($page == "result" ? "active" : "")?>" href="student_view_result.php">My Result</a>
               </div>
             </div>  
         </li>
         <li class="nav-item <?php echo ($page == "group" ? "active" : "")?>">
             <a class="nav-link" href="student_view_group.php">Private Group</a>
-        </li>
-        <li class="nav-item <?php echo ($page == "result" ? "active" : "")?>">
-            <a class="nav-link" href="student_view_result.php">My Result</a>
         </li>
     </ul>
     

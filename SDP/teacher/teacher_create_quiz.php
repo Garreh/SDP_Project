@@ -16,7 +16,7 @@
             i++
             q++; 
             a+=3;
-            $("#dynamic_field").append("<div id='row"+i+"' class='container'><hr/><label>Question "+q+"</label><input type='text' class='form-control' name='question["+q+"]' required='required' placeholder='Enter your question'/><br/><label>Correct Answer</label><input type='text' class='form-control' name='correct["+q+"]' required='required' placeholder='Enter the correct answer'/><br/><label>Answer B</label><input type='text' class='form-control' name='ans["+a+"]' required='required' placeholder='Enter the false answer'/><br/><label>Answer C</label><input type='text' class='form-control' name='ans["+(a+1)+"]' required='required' placeholder='Enter the false answer'/><br/><label>Answer D</label><input type='text' class='form-control' name='ans["+(a+2)+"]' required='required' placeholder='Enter the false answer'/><br/><center id='rmv"+i+"'><button class='btn btn-danger btn_remove' type='button' style='width:10vw' name='remove' id='remove"+i+"'>Remove</button></center><br/></div>");
+            $("#dynamic_field").append("<div id='row"+i+"' class='container'><hr/><label>Question "+q+"</label><textarea class='form-control' name='question["+q+"]' required='required' placeholder='Enter your question'></textarea><br/><label>Correct Answer</label><input type='text' class='form-control' name='correct["+q+"]' required='required' placeholder='Enter the correct answer'/><br/><label>Answer B</label><input type='text' class='form-control' name='ans["+a+"]' required='required' placeholder='Enter the false answer'/><br/><label>Answer C</label><input type='text' class='form-control' name='ans["+(a+1)+"]' required='required' placeholder='Enter the false answer'/><br/><label>Answer D</label><input type='text' class='form-control' name='ans["+(a+2)+"]' required='required' placeholder='Enter the false answer'/><br/><center id='rmv"+i+"'><button class='btn btn-danger btn_remove' type='button' style='width:10vw' name='remove' id='remove"+i+"'>Remove</button></center><br/></div>");
             $("#remove"+(i-1)+"").remove();
         });
         $(document).on('click','.btn_remove',function(){
@@ -55,6 +55,11 @@
             $teacher_id = $row['teacher_id'];
         }
     }
+    
+    if(isset($_GET['quiz_id']) && isset($_GET['post_id']))
+    {
+        $quiz_id = $_GET['quiz_id'];
+        $post_id = $_GET['post_id'];
 ?>
 
 <div class="container-fluid w-75" style="margin-top:1%; margin-bottom:15%;">
@@ -63,10 +68,10 @@
         <div class="card-body">
         <form method="post" action="back/insert_quiz_question.php">
             <div class="container-fluid" id="dynamic_field">
-            <input type="hidden" name="quiz_id" value="1"/>
+            <input type="hidden" name="quiz_id" value="<?php echo $quiz_id ?>"/>
             <div class="container">
             <label>Question 1</label>
-            <input type='text' class='form-control' name='question[1]' required="required" placeholder='Enter your question'/>
+            <textarea class='form-control' name='question[1]' required="required" placeholder='Enter your question'></textarea>
             <br/>
             <label>Correct Answer</label>
             <input type='text' class='form-control' name='correct[1]' required="required" placeholder='Enter the correct answer'/>
@@ -97,6 +102,13 @@
     </div>
     </div>
 </div>
+<?php
+    }
+    else
+    {
+        die("<script>window.history.go(-1)</script>");
+    }
+?>
 <?php include "css/footer.php" ?>   
 </body>    
     

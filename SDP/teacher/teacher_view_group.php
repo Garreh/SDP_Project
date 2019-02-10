@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     
 <head>
@@ -109,7 +110,7 @@
         {
             $group_id = $row['group_id'];
             $title = $row['group_title'];
-            echo "<h2 style=\"margin-right: 50%;\">$title</h2>";
+            echo "<button class='btn w-100' title='Click to view Description' data-toggle='modal' data-target='#titleDescription' style='background-color:inherit; font-size: 25px;'>$title</button>";
         } 
                     
 ?>                 
@@ -118,10 +119,7 @@
         <div class="container-fluid">
             <div class="card">
                 
-                        <!-- Group Result -->
-                    
-                
-    
+<!-- Group Result --> 
   
             
  <?php 
@@ -140,17 +138,17 @@
             $post_description = $row['post_description'];
             $post_date = $row['post_date'];
             
-            
                 echo "<div class=\"card bg-light text-dark\" style=\"height: 60vh; margin-bottom: 6vh;\">";
                 echo "<div class=\"card-body\" style=\"max-height: 65vh;\">";
                 echo "<div class=\"container-fluid float-left w-50 h-100\" style=\"width: 40vw; max-height: 65vh;\">";
-                echo "<h7 class=\"w-75\" style=\"display:inline-block\"><a href=\"#\">$post_title</a></h7>";
+                echo "<h7 class=\"w-75\" style=\"display:inline-block\"><a href='group_post_detail.php?group_id=".$group_id."&post_id=".$post_id."'>$post_title</a></h7>";
                 echo "<h7 class=\"float-right\" style=\"display:inline-block\">$post_date</h7><hr/>";
                 echo "<p class=\"w-100 h-75\">$post_description</p>";
                 echo "</div>";
                 echo "<div class=\"container-fluid float-right w-50 h-100\" style=\" width: 40vw; height: 65%;\">";
                 
-                echo "<p style=\"text-decoration:underline\">Comment</p>";
+                echo "<p class='float-left' style=\"text-decoration:underline\">Comment</p>";
+                echo "<p class='text-dark float-right'><a href='back/delete_group_post.php?group_id=".$group_id."&post_id=".$post_id."'>Delete Post</a></p><br/><br/>";
                 echo "<div class=\"card scroll\" style=\"overflow: auto; padding:5px;max-height: 65%;\">";
                 echo "<div class=\"container-fluid float-left\">";
                 $sql_comment = "SELECT * FROM comment WHERE post_id = '$post_id'";
@@ -311,6 +309,42 @@
     if(isset($_GET['group']))
     {
         ?>
+    
+    <!-- //////////////////////////////////////////////////////////// -->
+                <!-- Title Description Modal -->
+                <div class="modal fade" id="titleDescription">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Group Description</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <?php 
+                            $sql_description = "SELECT * FROM private_group WHERE group_id = '$group_id'";
+                            $result_description = mysqli_query($conn,$sql_description);
+                            while($row = mysqli_fetch_array($result_description))
+                            {
+                                $group_description = $row['group_description'];
+                            }
+                            ?>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                            <?php echo $group_description ?>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+    
+    <!-- //////////////////////////////////////////////////////////// -->
+    
                     <!-- Add Post Modal -->
                 <div class="modal fade" id="createPost">
                     <div class="modal-dialog">

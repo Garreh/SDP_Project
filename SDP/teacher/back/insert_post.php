@@ -42,7 +42,7 @@ if(isset($_POST['post_title']) && isset($_POST['post_desc']))
         }
         else
         {
-            $id_sql = "SELECT * FROM post WHERE post_title ='$post_title' AND post_description = '$post_desc' AND post_type = '$post_type' AND post_date = '$date'";
+            $id_sql = "SELECT * FROM post WHERE post_title ='$post_title' AND post_description = '$post_desc' AND post_type = '$post_type'";
             $id_result = mysqli_query($conn,$id_sql);
             while($row = mysqli_fetch_array($id_result))
             {
@@ -50,7 +50,7 @@ if(isset($_POST['post_title']) && isset($_POST['post_desc']))
             }
             
             echo "<script>alert('Post Created Successfully!')</script>";
-            echo "<script>window.location.href='../teacher_post_detail.php?".$post_id."'</script>";
+            echo "<script>window.location.href='../teacher_post_detail.php?post_id=".$post_id."'</script>";
         }
     }
     else

@@ -31,10 +31,10 @@
         <label>Post description</label>
         <textarea name="post_desc" required="required" class="form-control w-50" placeholder="Write..." rows="4" cols="50"></textarea>
         <br/>
-        
         <input type="file" class="w-25 file-this small" name="upload_post_file"/>
         <br/>
         <br/>
+    
         <input type="submit" class="btn btn-success w-25" value="Create"/>
         
     </form>
