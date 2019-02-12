@@ -43,6 +43,8 @@ echo "</div>";
 } */
 ?>
 <h1>Leave a comment:</h1>
+<?php //echo $_SESSION['user']; ?>
+
 <form action="uploadcomment.php" method="post">
 <table align="center">
 
