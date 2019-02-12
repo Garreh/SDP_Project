@@ -30,7 +30,7 @@ if(isset($_POST['post_title']) && isset($_POST['post_desc']))
     if(!empty($_FILES['upload_post_file']['name']))
     {
         include "post_file_upload.php";
-    
+        $destination = substr($destination,3); //the path of destination is ../post_img/something.jpg
         $sql = "INSERT INTO post(post_title,post_description,post_type,post_picture,post_date,teacher_id) VALUES('$post_title','$post_desc','$post_type','$destination','$date','$teacher_id')";
 
         mysqli_query($conn,$sql);

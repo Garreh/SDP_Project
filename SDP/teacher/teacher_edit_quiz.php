@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Edit Quiz</title>    
-<?php include "css/header.php"; ?>
+<?php include "css/header.php"; session_start(); ?>
 </head>
 
 <body>

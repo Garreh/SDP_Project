@@ -4,6 +4,7 @@
 <title>Create Test</title>   
 <?php
     include "css/header.php";  
+    session_start();
 ?>   
     
 </head>

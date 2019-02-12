@@ -3,7 +3,7 @@
 
 <head>
 <title>Create Post</title>
-<?php include "css/header.php"; ?>
+<?php include "css/header.php"; session_start(); ?>
 <style type="text/css">
     .file-this:hover{
         cursor: pointer;

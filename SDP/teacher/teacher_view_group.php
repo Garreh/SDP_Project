@@ -5,7 +5,8 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/group.css"/>      
 <?php
-  include "css/header.php";  
+    include "css/header.php";  
+    session_start();
 ?>
 <title>Private Groups</title> 
 
@@ -128,7 +129,7 @@
                 echo "<div class=\"container-fluid scroll\" style=\"overflow: auto; max-width: 100vw; max-height: 70vh;\">";
         
         
-        $sql = "SELECT * FROM post WHERE group_id = '$group_id' AND post_type= 'PRIVATE' AND teacher_id ='$teacher_id'";
+        $sql = "SELECT * FROM post WHERE group_id = '$group_id' AND post_type= 'PRIVATE' AND teacher_id ='$teacher_id' ORDER BY post_id";
         $result = mysqli_query($conn,$sql);
         
         while($row = mysqli_fetch_array($result))
@@ -148,47 +149,56 @@
                 echo "<div class=\"container-fluid float-right w-50 h-100\" style=\" width: 40vw; height: 65%;\">";
                 
                 echo "<p class='float-left' style=\"text-decoration:underline\">Comment</p>";
-                echo "<p class='text-dark float-right'><a href='back/delete_group_post.php?group_id=".$group_id."&post_id=".$post_id."'>Delete Post</a></p><br/><br/>";
+                echo "<p class='text-dark float-right'><a href='javascript:void(0)' data-toggle='modal' data-target='#editPost".$post_id."'>Edit Post</a></p><br/><br/>";
                 echo "<div class=\"card scroll\" style=\"overflow: auto; padding:5px;max-height: 65%;\">";
                 echo "<div class=\"container-fluid float-left\">";
-                $sql_comment = "SELECT * FROM comment WHERE post_id = '$post_id'";
+                $sql_comment = "SELECT * FROM comment WHERE post_id = '$post_id' ORDER BY comment_id";
                 $result_comment = mysqli_query($conn,$sql_comment);
                 while($rows = mysqli_fetch_array($result_comment))
                 {
+                    $comment_id = $rows['comment_id'];
                     $comment = $rows['comment'];
                     $date = $rows['comment_datetime'];
-                    $student_id = $rows['student_id'];
-                    $teacher_id = $rows['teacher_id'];
+                    $student = $rows['student_id'];
+                    $teacher = $rows['teacher_id'];
                     
 
-                    if(empty($student_id))
+                    if(empty($student))
                     {
-                        $sql_name = "SELECT * FROM teacher WHERE teacher_id = '$teacher_id'";
+                        $sql_name = "SELECT * FROM teacher WHERE teacher_id = '$teacher'";
                         $result_name = mysqli_query($conn,$sql_name);
                         while($row_name = mysqli_fetch_array($result_name))
                         {
                             $teacher_username = $row_name['teacher_username'];
                             $role = "Teacher";
-                            echo "<h7 class=\"w-50\" style=\"display:inline-block\">$teacher_username</h7>";
+                            echo "<h7 class=\"w-50 text-success\" style=\"display:inline-block; text-decoration:underline\">$teacher_username</h7>";
 
                         }
                     }
-                    else if(empty($teacher_id))
+                    else if(empty($teacher))
                     {
-                        $sql_name = "SELECT * FROM student WHERE student_id = '$student_id'";
+                        $sql_name = "SELECT * FROM student WHERE student_id = '$student'";
                         $result_name = mysqli_query($conn,$sql_name);
                         while($row_name = mysqli_fetch_array($result_name))
                         {
                             $student_username = $row_name['student_username'];
                             $role = "Student";
-                            echo "<h7 class=\"w-50\" style=\"display:inline-block\">$student_username</h7>";
+                            echo "<h7 class=\"w-50 text-success\" style=\"display:inline-block; text-decoration:underline\">$student_username</h7>";
                             
                         }
                     }
                     
-                        echo "<h7 class=\"float-right\" style=\"display:inline-block\">$date</h7>";
-                        echo "<p>$comment</p>";
-                        echo "<hr/>";                    
+                        echo "<h7 class=\"float-right\" style=\"display:inline-block\">$date</h7><br/>";
+                        echo "<h8 class='float-left'>$comment</h8>";
+                        if($teacher == $teacher_id)
+                        {
+                            echo "<a href='back/delete_comment.php?comment_id=".$comment_id."' style='display:inline-block' class='card-link float-right'>Delete</a>";
+                        }
+                        else if($student == $teacher_id)
+                        {
+                            echo "<a href='back/delete_comment.php?comment_id=".$comment_id."' style='display:inline-block' class='card-link float-right'>Delete</a>";
+                        }
+                        echo "<br/><hr/>";                    
                 }
                 echo "</div></div><br/>";
             
@@ -344,6 +354,55 @@
                 </div>
     
     <!-- //////////////////////////////////////////////////////////// -->
+    <?php
+        $sql = "SELECT * FROM post WHERE group_id = '$group_id'";
+        $result = mysqli_query($conn,$sql);
+        while($row = mysqli_fetch_array($result))
+        {
+            $p_id = $row['post_id'];
+            $p_title = $row['post_title'];
+            $p_description = $row['post_description'];
+    ?>
+    
+                    <!-- Edit Post Modal -->
+                <div class="modal fade" id="editPost<?php echo $p_id ?>">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit Post</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                            <form method="post" action="back/edit_group_post.php">
+                                
+                                <input type="hidden" name="group_id" value="<?php echo $group_id ?>"/>
+                                <input type="hidden" name="post_id" value="<?php echo $p_id ?>"/>
+                                <input type="text" name="post_title" class="form-control" placeholder="Enter Post Title..." value="<?php echo $p_title ?>" required="required"/><br/>
+                                <textarea class="form-control" name="post_description" required="required" placeholder="Enter Post Description"><?php echo $p_description ?></textarea><br/>
+                                <center> 
+                                <input type="submit" class="btn btn-success w-50" value="Edit Post" name="submit"/>
+                                </center>
+                            </form>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <?php
+                                echo "<button class='btn btn-warning' onclick=\"location.href='back/delete_group_post.php?group_id=".$group_id."&post_id=".$p_id."'\">Delete</button>";
+                                ?>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+    <?php
+        }
+    ?>
+    <!-- //////////////////////////////////////////////////////////// -->
     
                     <!-- Add Post Modal -->
                 <div class="modal fade" id="createPost">
@@ -406,6 +465,7 @@
                                     $result = mysqli_query($conn,$sql);
                                     while($row = mysqli_fetch_array($result))
                                     {
+                                        $student_id = $row['student_id'];
                                         $student_username = $row['student_username'];
                                         $student_email = $row['student_email'];
                                         $student_name = $row['first_name']." ".$row['last_name'];
@@ -417,6 +477,7 @@
                                         echo "<td><input type='text' class='form-control' value='$student_username' readonly/></td>";
                                         echo "<td><input type='text' class='form-control' value='$student_email' readonly/></td>";
                                         echo "<td><input type='text' class='form-control' value='$student_name' readonly/></td>";
+                                        echo "<td><button class='btn btn-warning w-100' onclick=\"location.href='back/kick_group_member.php?group_id=".$group_id."&student_id=".$student_id."'\">Kick</button>";
                                         echo "</tr>";
                                     }
                                 ?>

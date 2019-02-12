@@ -64,18 +64,18 @@
                                  echo"<div class='post'>";
                                   echo "<div class='post_image'><img src='../post_img/default.png' width='20%' height='10%'/></div>";
                                     echo"<div class='post_desc'>";
-                                      echo "<div class='product_title'><a href='viewpost.php?id=".$rows['post_id']."'>".$rows['post_title']."</a></div>";
+                                      echo "<div class='product_title'><a href='post_detail.php?post_id=".$rows['post_id']."'>".$rows['post_title']."</a></div>";
                                      echo"</div>";
-                                 echo"</div>";
+                                 echo"</div><hr/>";
                             }
                             else
                             {
                                  echo"<div class='post'>";
-                                  echo "<div class='post_image'><img src='".$rows['post_picture']."' width='100%'/></div>";
+                                  echo "<div class='post_image'><img src='".$rows['post_picture']."' width='20%' height='10%'/></div>";
                                     echo"<div class='post_desc'>";
-                                      echo "<div class='product_title'><a href='viewpost.php?id=".$rows['post_id']."'>".$rows['post_title']."</a></div>";
+                                      echo "<div class='product_title'><a href='post_detail.php?post_id=".$rows['post_id']."'>".$rows['post_title']."</a></div>";
                                      echo"</div>";
-                                 echo"</div>";
+                                 echo"</div><hr/>";
                             }
 					  }
 				 ?>

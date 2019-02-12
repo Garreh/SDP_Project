@@ -2,7 +2,8 @@
 <html>
 <head>
 <title>Group Post Details</title>
-<?php include "css/header.php" ?>
+<?php include "css/header.php"; session_start(); ?>
+    
 </head>
 
 <?php 

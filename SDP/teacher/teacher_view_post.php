@@ -4,7 +4,8 @@
 <head>
     <title>Post Listing</title>
     <?php
-    include "css/header.php";  
+    include "css/header.php"; 
+    session_start();
     ?>
 </head>
     

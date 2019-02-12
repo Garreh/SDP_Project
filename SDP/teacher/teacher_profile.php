@@ -4,6 +4,7 @@
 <title>User Profile</title>  
 <?php
     include "css/header.php";
+    session_start();
 ?>
 <style type="text/css">
     .card-link-this:hover{
