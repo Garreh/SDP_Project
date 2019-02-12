@@ -14,7 +14,7 @@ $id = $_GET['id'];
 
 include "conn.php";
       
- $sql = "Select * from comemnt where post_id = $id";
+ $sql = "Select * from comemnt where post_id = $id ORDER BY comment_id";
       
  $result = mysqli_query($conn, $sql);
 
