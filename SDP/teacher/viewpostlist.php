@@ -12,7 +12,7 @@
 
 <body>
 <?php 
-    session_start();
+    
     $page = "post";
     include "css/navbar.php";
 ?>
