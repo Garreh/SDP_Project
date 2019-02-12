@@ -1,0 +1,52 @@
+﻿/*.post
+{
+	width: 100%;
+	background: #FFFFFF;
+	z-index: 2;
+	padding-top: 89px;
+}
+.products_title
+{
+	font-size: 30px;
+	font-weight: 500;
+	color: #1b1b1b;
+}
+.product_grid
+{
+	margin-top: 88px;
+} */
+.post
+{
+	width: calc((100% - 90px) / 4);
+	margin-bottom: 59px;
+}
+.post_image
+{
+	width: 100%;
+}
+.post_image img
+{
+	max-width: 100%;
+}
+.post_desc
+{
+	width: 100%;
+	padding-top: 36px;
+	padding-bottom: 38px;
+}
+.post_title a
+{
+	font-size: 18px;
+	font-weight: 500;
+	color: #1b1b1b;
+	line-height: 1.1;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.post_title a:hover
+{
+	color: #e95a5a;
+}
