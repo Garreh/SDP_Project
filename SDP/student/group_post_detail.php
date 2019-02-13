@@ -11,20 +11,20 @@
     include "css/navbar.php";
     include "back/conn.php";
     
-    if(!isset($_SESSION['teacher']))
+    if(!isset($_SESSION['student']))
     {
-        echo "<script>alert('You did not login yet! Teacher')</script>";
+        echo "<script>alert('You did not login yet! student')</script>";
         die("<script>window.location.href='../login_page.php'</script>");
     }
     else
     {
         
-        $teacher = $_SESSION['teacher'];
-        $query = "SELECT * FROM teacher WHERE teacher_username = '$teacher'";
+        $student = $_SESSION['student'];
+        $query = "SELECT * FROM student WHERE student_username = '$student'";
         $result = mysqli_query($conn,$query);
         while($row = mysqli_fetch_array($result))
         {
-            $teacher_id = $row['teacher_id'];
+            $student_id = $row['student_id'];
         }
     }
     
@@ -33,7 +33,7 @@
         $group_id = $_GET['group_id'];
         $post_id = $_GET['post_id'];
         
-        $sql = "SELECT * FROM post WHERE post_id = '$post_id' AND teacher_id = '$teacher_id' AND group_id = '$group_id'";
+        $sql = "SELECT * FROM post INNER JOIN private_group ON post.group_id = private_group.group_id INNER JOIN student_group ON private_group.group_id = student_group.group_id WHERE post.post_id = '$post_id' AND post.group_id = '$group_id' AND student_group.student_id = '$student_id'";
         $result = mysqli_query($conn,$sql);
         while($rows = mysqli_fetch_array($result))
         {
@@ -77,7 +77,7 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Add New Material</h4>
+          <h4 class="modal-title">Material List</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -90,49 +90,12 @@
             {
         ?>
             
-            <form method='post' action='back/insert_group_material.php' enctype="multipart/form-data">
-                <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
-                <input type='hidden' name='group_id' value='<?php echo $group_id ?>'/>
-                <label>Material Title</label>
-                <input type='text' name='material_title' class='form-control' required='required' placeholder='Please enter the material title...'/>
-                <br/>
-                <label>Material Description</label>
-                <textarea name='material_description' class='form-control' required='required' placeholder='Please enter the material description...'></textarea>
-                <br/>
-                <center>
-                <label for='material_image' style='padding-left:15%'>Upload Image</label>
-                <input type='file' id='material_image' name='material_image'/>
-                <br/>
-                <input type='submit' class='w-25 btn btn-success' value='Create'/>
-                </center>
-            </form>
+            <h4>There is no material posted yet!</h4>
             
         <?php    
             }
             else
             {
-        ?>
-            
-            
-            <form method='post' action='back/insert_group_material.php' enctype="multipart/form-data">
-                <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
-                <input type='hidden' name='group_id' value='<?php echo $group_id ?>'/>
-                <label>Material Title</label>
-                <input type='text' name='material_title' class='form-control' required='required' placeholder='Please enter the material title...'/>
-                <br/>
-                <label>Material Description</label>
-                <textarea name='material_description' class='form-control' required='required' placeholder='Please enter the material description...'></textarea>
-                <br/>
-                <center>
-                <label for='material_image' style='margin-left:15%'>Upload Image</label>
-                <input type='file' id='material_image' name='material_image'/>
-                <br/>
-                <input type='submit' class='w-25 btn btn-success' value='Create'/>
-                </center>
-            </form>
-           
-            <hr/><h4>Material Listing</h4>
-        <?php
                 $material_total = 1;
                 while($row = mysqli_fetch_array($result))
                 {
@@ -143,7 +106,6 @@
         <?php 
             echo $material_total.". ";
             echo "<a href='group_material_detail.php?group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'>".$material_title."</a>";
-            echo "<a class='float-right' href='back/delete_group_material.php?group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'>Delete</a>";
         ?>
             </h5>
         <?php
@@ -171,7 +133,7 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Create New Quiz</h4>
+          <h4 class="modal-title">Quiz Listing</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -184,43 +146,12 @@
             {
         ?>
             
-            <form method='post' action='back/insert_group_quiz.php'>
-                <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
-                <input type='hidden' name='group_id' value='<?php echo $group_id ?>'/>
-                <label>Quiz Title</label>
-                <input type='text' name='quiz_title' class='form-control' required='required' placeholder='Please enter the quiz title...'/>
-                <br/>
-                <label>Quiz Description</label>
-                <textarea name='quiz_description' class='form-control' required='required' placeholder='Please enter the quiz description...'></textarea>
-                <br/>
-                <center>
-                <input type='submit' class='w-25 btn btn-success' value='Create'/>
-                </center>
-            </form>
+            <h4>There is no quiz posted yet!</h4>
             
         <?php    
             }
             else
             {
-        ?>
-            
-            
-            <form method='post' action='back/insert_group_quiz.php'>
-                <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
-                <input type='hidden' name='group_id' value='<?php echo $group_id ?>'/>
-                <label>Quiz Title</label>
-                <input type='text' name='quiz_title' class='form-control' required='required' placeholder='Please enter the quiz title...'/>
-                <br/>
-                <label>Quiz Description</label>
-                <textarea name='quiz_description' class='form-control' required='required' placeholder='Please enter the quiz description...'></textarea>
-                <br/>
-                <center>
-                <input type='submit' class='w-25 btn btn-success' value='Create'/>
-                </center>
-            </form>
-            
-            <hr/><h4>Quiz Listing</h4>
-        <?php
                 $quiz_total = 1;
                 while($row = mysqli_fetch_array($result))
                 {
@@ -230,8 +161,7 @@
             <hr/><h5>
         <?php 
             echo $quiz_total.". ";
-            echo "<a href='teacher_edit_quiz.php?group_id=".$group_id."&post_id=".$post_id."&quiz_id=".$quiz_id."'>".$quiz_title."</a>";
-            echo "<a class='float-right' href='back/delete_group_quiz.php?group_id=".$group_id."&post_id=".$post_id."&quiz_id=".$quiz_id."'>Delete</a>";
+            echo "<a href='student_view_quiz.php?group_id=".$group_id."&post_id=".$post_id."&quiz_id=".$quiz_id."'>".$quiz_title."</a>";
         ?>
             </h5>
         <?php
@@ -272,19 +202,7 @@
             {
         ?>
             
-            <form method='post' action='back/insert_group_test.php'>
-                <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
-                <input type='hidden' name='group_id' value='<?php echo $group_id ?>'/>
-                <label>Test Title</label>
-                <input type='text' name='test_title' class='form-control' required='required' placeholder='Please enter the test title...'/>
-                <br/>
-                <label>Test Description</label>
-                <textarea name='test_description' class='form-control' required='required' placeholder='Please enter the test description...'></textarea>
-                <br/>
-                <center>
-                <input type='submit' class='w-25 btn btn-success' value='Create'/>
-                </center>
-            </form>
+            <h4>There is no test yet!</h4>
             
         <?php    
             }
@@ -299,8 +217,7 @@
         ?>
             <h5>
         <?php 
-            echo "<a href='teacher_edit_test.php?group_id=".$group_id."&post_id=".$post_id."&test_id=".$test_id."'>".$test_title."</a>";
-            echo "<a class='float-right' href='back/delete_group_test.php?group_id=".$group_id."&post_id=".$post_id."&test_id=".$test_id."'>Delete</a><hr/>";
+            echo "<a href='student_view_test.php?group_id=".$group_id."&post_id=".$post_id."&test_id=".$test_id."'>".$test_title."</a>";
             echo "<p class='text-dark'>".$test_description."</p>";
         ?>
             </h5>

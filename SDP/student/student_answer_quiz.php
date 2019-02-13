@@ -153,13 +153,13 @@ if(isset($_GET['post_id']))
                 <div class='card-header' style='height:17vh'>
     <?php
 
-        $sql1 = "SELECT COUNT(*) AS total FROM question INNER JOIN quiz ON question.quiz_id = quiz.quiz_id INNER JOIN post ON quiz.post_id = post.post_id WHERE question.quiz_id = '$quiz_id' AND post.group_id IS NULL";
+        $sql1 = "SELECT COUNT(*) AS total FROM question INNER JOIN quiz ON question.quiz_id = quiz.quiz_id INNER JOIN post ON quiz.post_id = post.post_id WHERE question.quiz_id = '$quiz_id'";
         $result1 = mysqli_query($conn,$sql1);
         while($rows = mysqli_fetch_array($result1))
         {
             $total = $rows['total'];
         }
-        $sql2 = "SELECT * FROM question INNER JOIN quiz ON question.quiz_id = quiz.quiz_id INNER JOIN post ON quiz.post_id = post.post_id WHERE question.quiz_id = '$quiz_id' AND question.question_id = '$question_id' AND post.group_id IS NULL";
+        $sql2 = "SELECT * FROM question INNER JOIN quiz ON question.quiz_id = quiz.quiz_id INNER JOIN post ON quiz.post_id = post.post_id WHERE question.quiz_id = '$quiz_id' AND question.question_id = '$question_id'";
         $result2 = mysqli_query($conn,$sql2);
         while($rows = mysqli_fetch_array($result2))
         {

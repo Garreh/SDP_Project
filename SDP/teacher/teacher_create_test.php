@@ -42,7 +42,14 @@
     <div class="card card-light">
         <div class="card-body">
         <form method="post" action="back/insert_test_question.php">
-            <div class="container-fluid" id="dynamic_field">
+            <div class="container-fluid">
+            <?php
+                if(isset($_GET['group_id']))
+                {
+                    $group_id = $_GET['group_id'];
+                    echo "<input type='hidden' name='group_id' value='".$group_id."'/>";
+                }
+            ?>
             <input type="hidden" name="post_id" value="<?php echo $post_id ?>"/>
             <input type="hidden" name="test_id" value="<?php echo $test_id ?>"/>
             <?php 

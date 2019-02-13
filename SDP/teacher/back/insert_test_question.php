@@ -57,7 +57,15 @@
             }
             else
             {
-                echo "<script>window.location.href='../post_detail.php?post_id=".$post_id."'</script>";
+                if(isset($_POST['group_id']))
+                {
+                    $group_id = $_POST['group_id'];
+                    echo "<script>window.location.href='../group_post_detail.php?group_id=".$group_id."&post_id=".$post_id."'</script>";
+                }
+                else
+                {
+                    echo "<script>window.location.href='../post_detail.php?post_id=".$post_id."'</script>";
+                }
             }
             
     }

@@ -27,6 +27,7 @@
         }
     }
 ?>
+    
     <div class='container-fluid w-50' style='margin-top:2%;margin-bottom: 12%'>
         <div class='card'>
             <div class='card-header'>Edit Questions</div>
@@ -191,8 +192,15 @@ if(isset($_GET['post_id']))
             ?>
 
         <form method="post" action="back/insert_test_question.php">
-            <div class="container-fluid" id="dynamic_field">
+            <div class="container-fluid">
             <input type="hidden" name="post_id" value="<?php echo $post_id ?>"/>
+            <?php
+                if(isset($_GET['group_id']))
+                {
+                    $group_id = $_GET['group_id'];
+                    echo "<input type='hidden' name='group_id' value='$group_id'/>";
+                }
+            ?>
             <input type="hidden" name="test_id" value="<?php echo $test_id ?>"/>
             <?php 
                 
@@ -308,8 +316,36 @@ else
 ?>  
                     </div>
                 </div>
+        <br/>
+        <center>
+        <?php
+            if(isset($_GET['group_id']) && isset($_GET['quiz_id']))
+            {
+                $group_id = $_GET['group_id'];
+                $quiz_id = $_GET['quiz_id'];
+                echo "<button class='btn btn-secondary' onclick=\"location.href='teacher_edit_quiz.php?group_id=$group_id&post_id=$post_id&quiz_id=$quiz_id'\">DONE</button>";
+            }
+            else if(isset($_GET['group_id']) && isset($_GET['test_id']))
+            {
+                $group_id = $_GET['group_id'];
+                $test_id = $_GET['test_id'];
+                echo "<button class='btn btn-secondary' onclick=\"location.href='teacher_edit_test.php?group_id=$group_id&post_id=$post_id&test_id=$test_id'\">DONE</button>";
+            }
+            else if(isset($_GET['quiz_id']))
+            {
+                $quiz_id = $_GET['quiz_id'];
+                echo "<button class='btn btn-secondary' onclick=\"location.href='teacher_edit_quiz.php?post_id=$post_id&quiz_id=$quiz_id'\">DONE</button>";
+            }
+            else if(isset($_GET['test_id']))
+            {
+                $test_id = $_GET['test_id'];
+                echo "<button class='btn btn-secondary' onclick=\"location.href='teacher_edit_quiz.php?post_id=$post_id&test_id=$test_id'\">DONE</button>";
+            }
+            
+        ?>
+        </center>
             </div>
- 
+        
 <?php include "css/footer.php" ?>
 </body>
 </html>

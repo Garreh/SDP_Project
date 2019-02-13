@@ -136,7 +136,7 @@
                 echo "<div class=\"card bg-light text-dark\" style=\"height: 60vh; margin-bottom: 6vh;\">";
                 echo "<div class=\"card-body\" style=\"max-height: 65vh;\">";
                 echo "<div class=\"container-fluid float-left w-50 h-100\" style=\"width: 40vw; max-height: 65vh;\">";
-                echo "<h7 class=\"w-75\" style=\"display:inline-block\"><a href=\"#\">$post_title</a></h7>";
+                echo "<h7 class=\"w-75\" style=\"display:inline-block\"><a href=\"group_post_detail.php?group_id=$group_id&post_id=$post_id\">$post_title</a></h7>";
                 echo "<h7 class=\"float-right\" style=\"display:inline-block\">$post_date</h7><hr/>";
                 echo "<p class=\"w-100 h-75\">$post_description</p>";
                 echo "</div>";
