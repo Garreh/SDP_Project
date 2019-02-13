@@ -1,59 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php include "css/header.php"; ?>
+    <?php 
+    session_start();
+    include "css/header.php"; 
+    ?>
     <title>Post Details</title>
 </head>
 
 <body>
     <?php 
     $page = "post";
-    session_start();
+    
     include "css/navbar.php"; 
-    if(!isset($_SESSION['teacher']))
+    if(!isset($_SESSION['student']))
     {
-        echo "<script>alert('You did not login yet! Teacher')</script>";
+        echo "<script>alert('You did not login yet! Student')</script>";
         die("<script>window.location.href='../login_page.php'</script>");
     }
     else
     {
         include "back/conn.php";
-        $teacher = $_SESSION['teacher'];
-        $query = "SELECT * FROM teacher WHERE teacher_username = '$teacher'";
+        $student = $_SESSION['student'];
+        $query = "SELECT * FROM student WHERE student_username = '$student'";
         $result = mysqli_query($conn,$query);
         while($row = mysqli_fetch_array($result))
         {
-            $teacher_id = $row['teacher_id'];
+            $student_id = $row['student_id'];
         }
     }
     ?>
-    
-<?php 
-        if(isset($_GET['post_id']))
-        {
-            $post_id = $_GET['post_id'];
-            include "back/conn.php";
-            $sql = "Select * from post WHERE post_id = '$post_id'";
-            $result = mysqli_query($conn,$sql);
-              
-            while($row = mysqli_fetch_array($result))
-            {
-                $post_title = $row['post_title'];
-                $post_description = $row['post_description'];
-                $post_date = $row['post_date'];
-                $author = $row['teacher_id'];
-            }
-            if($author == $teacher_id)
-            {
-                echo "<button class='btn btn-warning float-left' style='margin:2%' data-toggle='modal' data-target='#editPost'>Edit</button>";
-            }
-?>
-<div class="container-fluid w-50" style="margin-top: 1%; margin-bottom:12%">
-
+<div class="container-fluid" style="margin-top: 1%; margin-bottom:12%">
+    <div class="container w-50">
         <div class="card"> 
         <div class="card-header">
-                <?php   
+            <?php 
+            if(isset($_GET['post_id']))
+            {
+                $post_id = $_GET['post_id'];
+                include "back/conn.php";
                 
+                date_default_timezone_set('Asia/Kuala_Lumpur'); 
+                $date = date("Y-m-d");
+                
+                $check_sql = "SELECT * FROM access WHERE student_id = '$student_id' AND post_id = '$post_id'";
+                $check_result = mysqli_query($conn,$check_sql);
+                if(mysqli_num_rows($check_result)<=0)
+                {
+                    $access_sql = "INSERT INTO access VALUES('$student_id','$post_id','$date')";
+                    mysqli_query($conn,$access_sql);
+                }
+                else
+                {
+                    $update_access = "UPDATE access SET date = '$date' WHERE student_id = '$student_id' AND post_id = '$post_id'";
+                }
+                    
+                
+                
+                $sql = "Select * from post WHERE post_id = '$post_id'";
+                $result = mysqli_query($conn,$sql);
+               
+                while($row = mysqli_fetch_array($result))
+                {
+                    $post_title = $row['post_title'];
+                    $post_description = $row['post_description'];
+                    $post_date = $row['post_date'];
+                    $author = $row['teacher_id'];
+                }
+                $sql = "SELECT * FROM teacher WHERE teacher_id = '$author'";
+                $result = mysqli_query($conn,$sql);
+                while($row = mysqli_fetch_array($result))
+                {
+                    $teacher_username = $row['teacher_username'];
+                }
                 echo "<h4  style='display:inline-block'>$post_title</h4>";
                 echo "<h4 class='float-right' style='display:inline-block'>$post_date</h4>";
                 ?>
@@ -61,11 +80,7 @@
             <div class="card-body" style="min-height: 30vh">
                 <?php echo $post_description ?>
             </div>
-            <?php
-                if($author == $teacher_id)
-                {
-                
-            ?>
+            
             <div class="card-footer" style="min-height: 10vh">
                 <center>
                     <div class="row">
@@ -73,7 +88,7 @@
                             <button type="button" class="btn btn-success w-75" data-toggle="modal" data-target="#materialModal">Material</button>
                         </div>
                         <div class="col-4">
-                            <button type="button" class="btn btn-info w-75" data-toggle="modal" data-target="#quizModal ">Quiz</button>
+                            <button type="button" class="btn btn-info w-75" data-toggle="modal" data-target="#quizModal">Quiz</button>
                         </div>
                         <div class="col-4">
                             <button type="button" class="btn btn-primary w-75" data-toggle="modal" data-target="#testModal">Test</button>
@@ -81,29 +96,27 @@
                     </div>
                 </center>
             </div>
-            <?php
-                }
-            ?>
+            
        </div>
-    
+    </div>
     <hr/>
 
-    <div class="container-fluid w-100">
+    <div class="container w-50">
         <center>
         <h2 style='text-decoration:underline;'>Comment Section</h2>
         </center>
         <div class="card">
             <div class="card-body">
             <?php
-            $sql_comment = "SELECT * FROM comment WHERE post_id = '$post_id' ORDER BY comment_id";
+                $sql_comment = "SELECT * FROM comment WHERE post_id = '$post_id' ORDER BY comment_id";
                 $result_comment = mysqli_query($conn,$sql_comment);
                 while($rows = mysqli_fetch_array($result_comment))
                 {
                     $comment_id = $rows['comment_id'];
                     $comment = $rows['comment'];
                     $date = $rows['comment_datetime'];
-                    $student = $rows['student_id'];
                     $teacher = $rows['teacher_id'];
+                    $student = $rows['student_id'];
 
                     if(is_null($student))
                     {
@@ -132,7 +145,7 @@
                     
                         echo "<h7 class='float-right' style='display:inline-block'>$date</h7><br/>";
                         echo "<p class='float-left'>$comment</p>";
-                        if($teacher == $teacher_id)
+                        if($student == $student_id)
                         {
                             echo "<a href='back/delete_comment.php?comment_id=".$comment_id."' style='display:inline-block' class='card-link float-right'>Delete</a>";
                         }
@@ -160,49 +173,6 @@
         
 <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
     
-    <!-- The EDIT POST Modal -->
-    
-    <div class="modal fade" id="editPost">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Edit Post</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-            <form method="post" action="back/edit_post.php">
-            <?php
-                $sql = "SELECT * FROM post WHERE post_id = '$post_id' AND group_id IS NULL";
-                $result = mysqli_query($conn,$sql);
-                while($row = mysqli_fetch_array($result))
-                {
-                    $post_title = $row['post_title'];
-                    $post_description = $row['post_description'];
-                }
-            ?>
-                <input type="hidden" name="post_id" value="<?php echo $post_id ?>"/>
-                <input type="text" name="post_title" class="form-control" placeholder="Enter Post Title..." value="<?php echo $post_title ?>" required="required"/><br/>
-                <textarea class="form-control" name="post_description" required="required" placeholder="Enter Post Description"><?php echo $post_description ?></textarea><br/>
-                <center> 
-                <input type="submit" class="btn btn-success w-50" value="Edit Post" name="submit"/>
-                </center>
-            </form>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-    
-<!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->   
     <!-- The MATERIAL Modal -->
   <div class="modal fade" id="materialModal">
     <div class="modal-dialog">
@@ -223,46 +193,14 @@
             {
         ?>
             
-            <form method='post' action='back/insert_material.php' enctype="multipart/form-data">
-                <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
-                <label>Material Title</label>
-                <input type='text' name='material_title' class='form-control' required='required' placeholder='Please enter the material title...'/>
-                <br/>
-                <label>Material Description</label>
-                <textarea name='material_description' class='form-control' required='required' placeholder='Please enter the material description...'></textarea>
-                <br/>
-                <center>
-                <label for='material_image' style='padding-left:15%'>Upload Image</label>
-                <input type='file' id='material_image' name='material_image'/>
-                <br/>
-                <input type='submit' class='w-25 btn btn-success' value='Create'/>
-                </center>
-            </form>
+            <h3>There is no material yet</h3>
             
         <?php    
             }
             else
             {
-        ?>
-            
-            
-            <form method='post' action='back/insert_material.php' enctype="multipart/form-data">
-                <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
-                <label>Material Title</label>
-                <input type='text' name='material_title' class='form-control' required='required' placeholder='Please enter the material title...'/>
-                <br/>
-                <label>Material Description</label>
-                <textarea name='material_description' class='form-control' required='required' placeholder='Please enter the material description...'></textarea>
-                <br/>
-                <center>
-                <label for='material_image' style='margin-left:15%'>Upload Image</label>
-                <input type='file' id='material_image' name='material_image'/>
-                <br/>
-                <input type='submit' class='w-25 btn btn-success' value='Create'/>
-                </center>
-            </form>
-           
-            <hr/><h4>Material Listing</h4>
+        ?>          
+          <h4>Material Listing</h4>
         <?php
                 $material_total = 1;
                 while($row = mysqli_fetch_array($result))
@@ -274,7 +212,6 @@
         <?php 
             echo $material_total.". ";
             echo "<a href='material_detail.php?post_id=".$post_id."&material_id=".$material_id."'>".$material_title."</a>";
-            echo "<a class='float-right' href='back/delete_material.php?post_id=".$post_id."&material_id=".$material_id."'>Delete</a>";
         ?>
             </h5>
         <?php
@@ -315,40 +252,14 @@
             {
         ?>
             
-            <form method='post' action='back/insert_quiz.php'>
-                <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
-                <label>Quiz Title</label>
-                <input type='text' name='quiz_title' class='form-control' required='required' placeholder='Please enter the quiz title...'/>
-                <br/>
-                <label>Quiz Description</label>
-                <textarea name='quiz_description' class='form-control' required='required' placeholder='Please enter the quiz description...'></textarea>
-                <br/>
-                <center>
-                <input type='submit' class='w-25 btn btn-success' value='Create'/>
-                </center>
-            </form>
+            <h3>There is no quiz yet</h3>
             
         <?php    
             }
             else
             {
-        ?>
-            
-            
-            <form method='post' action='back/insert_quiz.php'>
-                <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
-                <label>Quiz Title</label>
-                <input type='text' name='quiz_title' class='form-control' required='required' placeholder='Please enter the quiz title...'/>
-                <br/>
-                <label>Quiz Description</label>
-                <textarea name='quiz_description' class='form-control' required='required' placeholder='Please enter the quiz description...'></textarea>
-                <br/>
-                <center>
-                <input type='submit' class='w-25 btn btn-success' value='Create'/>
-                </center>
-            </form>
-            
-            <hr/><h4>Quiz Listing</h4>
+        ?>            
+            <h4>Quiz Listing</h4>
         <?php
                 $quiz_total = 1;
                 while($row = mysqli_fetch_array($result))
@@ -359,8 +270,7 @@
             <hr/><h5>
         <?php 
             echo $quiz_total.". ";
-            echo "<a href='teacher_edit_quiz.php?post_id=".$post_id."&quiz_id=".$quiz_id."'>".$quiz_title."</a>";
-            echo "<a class='float-right' href='back/delete_quiz.php?post_id=".$post_id."&quiz_id=".$quiz_id."'>Delete</a>";
+            echo "<a href='student_view_quiz.php?post_id=".$post_id."&quiz_id=".$quiz_id."'>".$quiz_title."</a>";
         ?>
             </h5>
         <?php
@@ -401,18 +311,7 @@
             {
         ?>
             
-            <form method='post' action='back/insert_test.php'>
-                <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
-                <label>Test Title</label>
-                <input type='text' name='test_title' class='form-control' required='required' placeholder='Please enter the test title...'/>
-                <br/>
-                <label>Test Description</label>
-                <textarea name='test_description' class='form-control' required='required' placeholder='Please enter the test description...'></textarea>
-                <br/>
-                <center>
-                <input type='submit' class='w-25 btn btn-success' value='Create'/>
-                </center>
-            </form>
+            <h3>There is no test yet</h3>
             
         <?php    
             }
@@ -427,8 +326,7 @@
         ?>
             <h5>
         <?php 
-            echo "<a href='teacher_edit_test.php?post_id=".$post_id."&test_id=".$test_id."'>".$test_title."</a>";
-            echo "<a class='float-right' href='back/delete_test.php?post_id=".$post_id."&test_id=".$test_id."'>Delete</a><hr/>";
+            echo "<a href='student_view_test.php?post_id=".$post_id."&test_id=".$test_id."'>".$test_title."</a>";
             echo "<p class='text-dark'>".$test_description."</p>";
         ?>
             </h5>

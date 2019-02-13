@@ -3,6 +3,7 @@
 <head>
 <title>User Profile</title>  
 <?php
+    session_start();
     include "css/header.php";
 ?>
 <style type="text/css">

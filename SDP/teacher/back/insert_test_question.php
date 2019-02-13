@@ -17,13 +17,14 @@
         }
     }
 
-    if(isset($_POST['question']) && isset($_POST['correct']) && isset($_POST['ans']) && isset($_POST['test_id']))
+    if(isset($_POST['question']) && isset($_POST['correct']) && isset($_POST['ans']) && isset($_POST['test_id']) && isset($_POST['post_id']))
     {
         include "conn.php";
         $question = $_POST['question'];
         $ans_correct = $_POST['correct'];
         $ans = $_POST['ans'];
         $test_id = $_POST['test_id'];
+        $post_id = $_POST['post_id'];
         
         $a = 1;
         for($i = 1; $i<=40; $i++)
@@ -56,14 +57,14 @@
             }
             else
             {
-                echo "<script>window.location.href='../teacher_create_test.php'</script>";
+                echo "<script>window.location.href='../post_detail.php?post_id=".$post_id."'</script>";
             }
             
     }
     else
     {
         echo "<script>alert('No question entered')</script>";
-        die("<script>window.location.href='../teacher_create_test.php'</script>");
+        die("<script>window.history.go(-1)</script>");
     }
 
 ?>

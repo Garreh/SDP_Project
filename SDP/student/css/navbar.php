@@ -1,6 +1,3 @@
-<?php
-    session_start();    
-?>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark pt-3 pb-3 " style="background-color:#3A3837;font-family:Roboto;">
   <a class="navbar-brand" href="home_page.php">History</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,9 +9,9 @@
         <li class="nav-item <?php echo ($page == "home" ? "active" : "")?>">
             <a class="nav-link" href="home_page.php">Home</a>
         </li>
-        <li class="nav-item <?php echo ($page == "post" ? "active" : "")?>">
+        <li class="nav-item">
             <div class="btn-group">
-              <button type="button" style="background-color:inherit; border:none;" class="btn btn-primary nav-link" onclick="location.href='student_view_post.php'">Post</button>
+              <button type="button" style="background-color:inherit; border:none;" class="btn btn-primary nav-link <?php echo ($page == "post" ? "active" : "")?>" onclick="location.href='viewpostlist.php'">Post</button>
               <button type="button" style="background-color:inherit; border:none;" class="btn btn-primary dropdown-toggle dropdown-toggle-split nav-link" data-toggle="dropdown">
               </button>
               <div class="dropdown-menu">

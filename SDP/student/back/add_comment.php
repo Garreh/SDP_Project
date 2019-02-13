@@ -16,26 +16,50 @@ else
         $student_id = $row['student_id'];
     }
 }
-if(isset($_POST['comment'])&&isset($_POST['post_id'])&&isset($_POST['group_id']))
+if(isset($_POST['comment'])&&isset($_POST['post_id']))
 {
-    include "conn.php";
     $post_id = $_POST['post_id'];
     $comment = $_POST['comment'];
     date_default_timezone_set('Asia/Kuala_Lumpur'); 
-    $date = date("Y-m-d H:i:s"); 
-    $group_id = $_POST['group_id'];
+    $date = date("Y-m-d H:i:s");
     
-    $sql = "INSERT INTO comment (comment,comment_datetime,student_id,post_id) VALUES ('$comment','$date','$student_id','$post_id')";
-    mysqli_query($conn,$sql);
-    
-    if(mysqli_affected_rows($conn)<=0)
+    if(isset($_POST['group_id']))
     {
-        die("<script>window.history.go(-1)</script>");
+         
+        $group_id = $_POST['group_id'];
+    
+        $sql = "INSERT INTO comment (comment,comment_datetime,student_id,post_id) VALUES ('$comment','$date','$student_id','$post_id')";
+        mysqli_query($conn,$sql);
+
+        if(mysqli_affected_rows($conn)<=0)
+        {
+            die("<script>window.history.go(-1)</script>");
+        }
+        else
+        {
+
+            echo "<script>window.location.href='../student_view_group.php?group=$group_id'</script>";
+        }
     }
     else
     {
-        
-        echo "<script>window.location.href='../student_view_group.php?group=$group_id'</script>";
+        $sql = "INSERT INTO comment (comment,comment_datetime,student_id,post_id) VALUES ('$comment','$date','$student_id','$post_id')";
+        mysqli_query($conn,$sql);
+
+        if(mysqli_affected_rows($conn)<=0)
+        {
+            die("<script>window.history.go(-1)</script>");
+        }
+        else
+        {
+
+            echo "<script>window.location.href='../post_detail.php?post_id=".$post_id."'</script>";
+        }
     }
+    
+}
+else
+{
+    die("<script>window.history.go(-1)</script>");
 }
 ?>

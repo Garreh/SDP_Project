@@ -1,6 +1,6 @@
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark pt-3 pb-3 " style="background-color:#3A3837;font-family:Roboto;">
-  <a class="navbar-brand" href="#">History</a>
+  <a class="navbar-brand" href="home_page.php">History</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -11,7 +11,7 @@
             <a class="nav-link" href="home_page.php">Home</a>
         </li>
         <li class="nav-item <?php echo ($page == "post" ? "active" : "")?>">
-            <a class="nav-link" href="teacher_view_post.php">Post</a>
+            <a class="nav-link" href="viewpostlist.php">Post</a>
         </li>
         <li class="nav-item <?php echo ($page == "my_post" ? "active" : "")?>">
              <a class="nav-link" href="teacher_my_post.php">My Post</a>

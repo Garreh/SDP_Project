@@ -50,25 +50,16 @@
             }
             $a+=3;
             
-            if(mysqli_affected_rows($conn)<=0)
-            {
-                echo "<script>alert('Quiz Question Insertion Failed')</script>";
-                die("<script>window.history.go(-1)</script>");
-            }
-            else
-            {
                 if(isset($_POST['group_id']))
                 {
                     $group_id = $_POST['group_id'];
-                    echo "<script>window.location.href='../group_post_detail.php?group_id=".$group_id."&post_id=".$post_id."'</script>";
+                    echo "<script>window.location.href='../teacher_edit_question.php?group_id=".$group_id."&post_id=".$post_id."&quiz_id=".$quiz_id."'</script>";
                 }
                 else
                 {
-                    echo "<script>window.location.href='../post_detail.php?post_id=".$post_id."'</script>";
+                    echo "<script>window.location.href='../teacher_edit_question.php?post_id=".$post_id."&quiz_id=".$quiz_id."'</script>";
                 }
-               
-            }
-            
+                      
         }
             
     }

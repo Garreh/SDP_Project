@@ -35,7 +35,7 @@
 				$_SESSION['teacher'] = $teacher; //set an admin session for username
 				$_SESSION['start'] = time();	//set the start time to the login moment
 				$_SESSION['expire'] = $_SESSION['start'] + (300 * 60); //set the time limit for login
-				echo "<script>window.location.href='../teacher_view_group.php';</script>"; //go to admin homepage
+				echo "<script>window.location.href='../home_page.php';</script>"; //go to admin homepage
 			}
 		}
 		else //if the first read result exist, will be user login(successful)
@@ -47,7 +47,7 @@
 			$_SESSION['teacher'] = $teacher; //set an admin session for username
 			$_SESSION['start'] = time();	//set the start time to the login moment
 			$_SESSION['expire'] = $_SESSION['start'] + (300 * 60); //set the time limit for login
-			echo "<script>window.location.href='teacher/home_page.php';</script>"; //go to user homepage
+			echo "<script>window.location.href='../home_page.php';</script>"; //go to user homepage
 		}
 	
 	}

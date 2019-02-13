@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['teacher']))
 {
     echo "<script>alert('You did not login yet! Teacher')</script>";
-    die("<script>../../login_page.php</script>");
+    die("<script>window.location.href='../../login_page.php'</script>");
 }
 else
 {
@@ -17,9 +17,8 @@ else
     }
 }
 
-if(isset($_POST['group_id']) && isset($_POST['post_id']) && isset($_POST['test_title']) && isset($_POST['test_description']))
+if(isset($_POST['post_id']) && isset($_POST['test_title']) && isset($_POST['test_description']))
 {
-    $group_id = $_POST['group_id'];
     $post_id = $_POST['post_id'];
     $test_title = $_POST['test_title'];
     $test_description = $_POST['test_description'];
@@ -42,11 +41,12 @@ if(isset($_POST['group_id']) && isset($_POST['post_id']) && isset($_POST['test_t
         }
         
         echo "<script>alert('Test Created Successfully!')</script>";
-        echo "<script>window.location.href='../teacher_create_test.php?group_id=".$group_id."&post_id=".$post_id."&test_id=".$test_id."'</script>";
+        echo "<script>window.location.href='../teacher_create_test.php?post_id=".$post_id."&test_id=".$test_id."'</script>";
     }
 }
 else
 {
     die("<script>window.history.go(-1)</script>");
 }
+
 ?>

@@ -43,6 +43,7 @@
         <div class="card-body">
         <form method="post" action="back/insert_test_question.php">
             <div class="container-fluid" id="dynamic_field">
+            <input type="hidden" name="post_id" value="<?php echo $post_id ?>"/>
             <input type="hidden" name="test_id" value="<?php echo $test_id ?>"/>
             <?php 
                 

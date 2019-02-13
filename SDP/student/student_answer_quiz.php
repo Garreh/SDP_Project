@@ -4,11 +4,12 @@
 <head>
 <title>Quiz Answering</title> 
 <?php
+    session_start();
     include "css/header.php";
 ?>
 <script type="text/javascript">
 $(document).ready(function(){  //declare the page document for a function
-    $("button#answer").click(function(){ 	//get the id from the select option, if changed option, do the ajax
+    $("button#answer1").click(function(){ 	//get the id from the select option, if changed option, do the ajax
         var ans = $(this).val(); //declare the variable for the value to be posted to the ajax php file
         var ques = $("#question").val();
         $.post("back/get_quiz_answer.php", {answer: ans, question: ques}, function(data) //use for posting data without using any form and without changing the page
@@ -16,12 +17,95 @@ $(document).ready(function(){  //declare the page document for a function
             if(data.status == true)
             {  
                 $('#result').html(data.msg).css('color','green');//message color=green  
-                $("button#answer").attr("disabled",true);
+                $("button#answer1").addClass('btn-success');
+                $("button#answer1").attr("disabled",true);
+                $("button#answer2").attr("disabled",true);
+                $("button#answer3").attr("disabled",true);
+                $("button#answer4").attr("disabled",true);
             }
             else
             {
                 $('#result').html(data.msg).css('color','red');	//message color=red
-                $("button#answer").attr("disabled",true);
+                $("button#answer1").addClass('btn-danger');
+                $("button#answer1").attr("disabled",true);
+                $("button#answer2").attr("disabled",true);
+                $("button#answer3").attr("disabled",true);
+                $("button#answer4").attr("disabled",true);
+            }
+        }, 'json');
+    });
+    $("button#answer2").click(function(){ 	//get the id from the select option, if changed option, do the ajax
+        var ans = $(this).val(); //declare the variable for the value to be posted to the ajax php file
+        var ques = $("#question").val();
+        $.post("back/get_quiz_answer.php", {answer: ans, question: ques}, function(data) //use for posting data without using any form and without changing the page
+        {
+            if(data.status == true)
+            {  
+                $('#result').html(data.msg).css('color','green');//message color=green  
+                $("button#answer2").addClass('btn-success');
+                $("button#answer1").attr("disabled",true);
+                $("button#answer2").attr("disabled",true);
+                $("button#answer3").attr("disabled",true);
+                $("button#answer4").attr("disabled",true);
+            }
+            else
+            {
+                $('#result').html(data.msg).css('color','red');	//message color=red
+                $("button#answer2").addClass('btn-danger');
+                $("button#answer1").attr("disabled",true);
+                $("button#answer2").attr("disabled",true);
+                $("button#answer3").attr("disabled",true);
+                $("button#answer4").attr("disabled",true);
+            }
+        }, 'json');
+    });
+    $("button#answer3").click(function(){ 	//get the id from the select option, if changed option, do the ajax
+        var ans = $(this).val(); //declare the variable for the value to be posted to the ajax php file
+        var ques = $("#question").val();
+        $.post("back/get_quiz_answer.php", {answer: ans, question: ques}, function(data) //use for posting data without using any form and without changing the page
+        {
+            if(data.status == true)
+            {  
+                $('#result').html(data.msg).css('color','green');//message color=green 
+                $("button#answer3").addClass('btn-success');
+                $("button#answer1").attr("disabled",true);
+                $("button#answer2").attr("disabled",true);
+                $("button#answer3").attr("disabled",true);
+                $("button#answer4").attr("disabled",true);
+            }
+            else
+            {
+                $('#result').html(data.msg).css('color','red');	//message color=red
+                $("button#answer3").addClass('btn-danger');
+                $("button#answer1").attr("disabled",true);
+                $("button#answer2").attr("disabled",true);
+                $("button#answer3").attr("disabled",true);
+                $("button#answer4").attr("disabled",true);
+            }
+        }, 'json');
+    });
+    $("button#answer4").click(function(){ 	//get the id from the select option, if changed option, do the ajax
+        var ans = $(this).val(); //declare the variable for the value to be posted to the ajax php file
+        var ques = $("#question").val();
+        $.post("back/get_quiz_answer.php", {answer: ans, question: ques}, function(data) //use for posting data without using any form and without changing the page
+        {
+            if(data.status == true)
+            {  
+                $('#result').html(data.msg).css('color','green');//message color=green  
+                $("button#answer4").addClass('btn-success');
+                $("button#answer1").attr("disabled",true);
+                $("button#answer2").attr("disabled",true);
+                $("button#answer3").attr("disabled",true);
+                $("button#answer4").attr("disabled",true);
+            }
+            else
+            {
+                $('#result').html(data.msg).css('color','red');	//message color=red
+                $("button#answer4").addClass('btn-danger');
+                $("button#answer1").attr("disabled",true);
+                $("button#answer2").attr("disabled",true);
+                $("button#answer3").attr("disabled",true);
+                $("button#answer4").attr("disabled",true);
             }
         }, 'json');
     });
@@ -88,6 +172,8 @@ if(isset($_GET['post_id']))
                 </div>
                 <div class='card-body'>
         <?php
+        $i = 1;
+        
         $sql3 = "SELECT * FROM answer INNER JOIN question ON answer.question_id = question.question_id INNER JOIN quiz ON question.quiz_id = quiz.quiz_id WHERE answer.question_id = '$question_id' AND question.quiz_id='$quiz_id' ORDER BY RAND()";
         $result3 = mysqli_query($conn,$sql3);
         while($rows = mysqli_fetch_array($result3))
@@ -100,7 +186,8 @@ if(isset($_GET['post_id']))
             $result = mysqli_query($conn,$sql);
             if(mysqli_num_rows($result)<=0)
             {
-                echo "<button class='btn w-100' id='answer' value='".$answer_id."'>$answer_description</button><br/><br/>";
+                echo "<button class='btn w-100' id='answer".$i."' value='".$answer_id."'>$answer_description</button><br/><br/>";
+                $i++;
             }
             else
             {
@@ -163,7 +250,7 @@ if(isset($_GET['post_id']))
                     </div>
                 </div>
             </div>
-            <center><button class='btn btn-warning w-25' style='margin-bottom: 5%;' onclick="location.href='student_view_post.php?post_id=<?php echo $post_id ?>'">Back</button></center>
+            <center><button class='btn btn-warning w-25' style='margin-bottom: 5%;' onclick="location.href='student_view_quiz.php?post_id=<?php echo $post_id ?>&quiz_id=<?php echo $quiz_id ?>'">Back</button></center>
         </div>
     <?php
     }

@@ -1,9 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <link href="viewpostlist.css" rel="stylesheet" type="text/css"/>
-
-
-
 <head>
 <?php include "css/header.php"; ?>
 <link href="viewpostlist.css" rel="stylesheet" type="text/css"/>
@@ -12,25 +9,33 @@
 
 <body>
 <?php 
-    
+    include "back/conn.php";
+    session_start();
     $page = "post";
     include "css/navbar.php";
+    if(!isset($_SESSION['teacher']))
+    {
+        echo "<script>alert('You did not login yet! Teacher')</script>";
+        die("<script>window.location.href='../login_page.php'</script>");
+    }
+    else
+    {
+        $teacher = $_SESSION['teacher'];
+        $query = "SELECT * FROM teacher WHERE teacher_username = '$teacher'";
+        $result = mysqli_query($conn,$query);
+        while($row = mysqli_fetch_array($result))
+        {
+            $teacher_id = $row['teacher_id'];
+        }
+    }
 ?>
 
 <script type="text/javascript" src="/SDP/javascripts/main.js"></script>
-
+<button class='btn btn-success float-right' onclick="location.href='teacher_create_post.php" style='margin:3%'>Create Post</button>
 <!--Post -->
  <div class="post">
-  <div class="container">
-			<div class="row">
-				<div class="col">
-					
-					<!-- Product Sorting -->
-					<div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start">
-						<div class="results">Showing <span></span> results</div>
-					</div>
-				</div>
-			</div>
+  <div class="container" style='margin-top: 2%;margin-bottom:15%'>
+      <center><h1>Post List</h1></center>
 			<div class="row">
 				<div class="col">
 					
@@ -39,12 +44,9 @@
 		
 
                <?php 
-                
-                  include "back/conn.php";
+                          
                   
-                  
-                  
-                  $sql = "Select * from post WHERE post_type = 'PUBLIC' ORDER BY post_id";
+                  $sql = "Select * from post WHERE post_type = 'PUBLIC' ORDER BY post_id DESC";
                   
          
                   $result = mysqli_query($conn, $sql); 

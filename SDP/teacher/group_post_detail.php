@@ -229,7 +229,7 @@
             <hr/><h5>
         <?php 
             echo $quiz_total.". ";
-            echo "<a href='group_edit_quiz.php?group_id=".$group_id."&post_id=".$post_id."&quiz_id=".$quiz_id."'>".$quiz_title."</a>";
+            echo "<a href='teacher_edit_quiz.php?group_id=".$group_id."&post_id=".$post_id."&quiz_id=".$quiz_id."'>".$quiz_title."</a>";
             echo "<a class='float-right' href='back/delete_group_quiz.php?group_id=".$group_id."&post_id=".$post_id."&quiz_id=".$quiz_id."'>Delete</a>";
         ?>
             </h5>
@@ -298,7 +298,7 @@
         ?>
             <h5>
         <?php 
-            echo "<a href='group_edit_test.php?group_id=".$group_id."&post_id=".$post_id."&test_id=".$test_id."'>".$test_title."</a>";
+            echo "<a href='teacher_edit_test.php?group_id=".$group_id."&post_id=".$post_id."&test_id=".$test_id."'>".$test_title."</a>";
             echo "<a class='float-right' href='back/delete_group_test.php?group_id=".$group_id."&post_id=".$post_id."&test_id=".$test_id."'>Delete</a><hr/>";
             echo "<p class='text-dark'>".$test_description."</p>";
         ?>

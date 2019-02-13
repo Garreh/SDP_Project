@@ -4,6 +4,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/group.css"/>      
 <?php
+    session_start();
     include "css/header.php";  
 ?>
 <title>Private Groups</title> 
@@ -16,7 +17,6 @@
 <?php
     $page = "group";
     include "css/navbar.php";
-    
     if(!isset($_SESSION['student']))
     {
         echo "<script>alert('You did not login yet! Student')</script>";
@@ -163,7 +163,7 @@
                         {
                             $teacher_username = $row_name['teacher_username'];
                             $role = "Teacher";
-                            echo "<h7 class=\"w-50\" style=\"display:inline-block\">$teacher_username</h7>";
+                            echo "<h7 class=\"w-50\" style=\"display:inline-block\">$teacher_username ($role)</h7>";
 
                         }
                     }
@@ -175,7 +175,7 @@
                         {
                             $student_username = $row_name['student_username'];
                             $role = "Student";
-                            echo "<h7 class=\"w-50\" style=\"display:inline-block\">$student_username</h7>";
+                            echo "<h7 class=\"w-50\" style=\"display:inline-block\">$student_username ($role)</h7>";
                             
                         }
                     }

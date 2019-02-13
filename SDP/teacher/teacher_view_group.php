@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
     
 <head>
@@ -46,7 +45,7 @@
             <ul class="list-unstyled components">
                 <?php
                     include "back/conn.php";
-                    $sql = "SELECT * FROM private_group WHERE teacher_id = 1 ORDER BY group_id";
+                    $sql = "SELECT * FROM private_group WHERE teacher_id = '$teacher_id' ORDER BY group_id";
                     $result = mysqli_query($conn,$sql);
                     if(mysqli_num_rows($result)<=0)
                     {
@@ -171,7 +170,7 @@
                         {
                             $teacher_username = $row_name['teacher_username'];
                             $role = "Teacher";
-                            echo "<h7 class=\"w-50 text-success\" style=\"display:inline-block; text-decoration:underline\">$teacher_username</h7>";
+                            echo "<h7 class=\"w-50 text-success\" style=\"display:inline-block; text-decoration:underline\">$teacher_username ($role)</h7>";
 
                         }
                     }
@@ -183,7 +182,7 @@
                         {
                             $student_username = $row_name['student_username'];
                             $role = "Student";
-                            echo "<h7 class=\"w-50 text-success\" style=\"display:inline-block; text-decoration:underline\">$student_username</h7>";
+                            echo "<h7 class=\"w-50 text-success\" style=\"display:inline-block; text-decoration:underline\">$student_username ($role)</h7>";
                             
                         }
                     }
@@ -191,10 +190,6 @@
                         echo "<h7 class=\"float-right\" style=\"display:inline-block\">$date</h7><br/>";
                         echo "<h8 class='float-left'>$comment</h8>";
                         if($teacher == $teacher_id)
-                        {
-                            echo "<a href='back/delete_comment.php?comment_id=".$comment_id."' style='display:inline-block' class='card-link float-right'>Delete</a>";
-                        }
-                        else if($student == $teacher_id)
                         {
                             echo "<a href='back/delete_comment.php?comment_id=".$comment_id."' style='display:inline-block' class='card-link float-right'>Delete</a>";
                         }

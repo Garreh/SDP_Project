@@ -1,9 +1,10 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['teacher']))
 {
     echo "<script>alert('You did not login yet! Teacher')</script>";
-    die("<script>../../login_page.php</script>");
+    die("<script>window.location.href='../../login_page.php'</script>");
 }
 else
 {
@@ -17,9 +18,8 @@ else
     }
 }
 
-if(isset($_POST['group_id']) && isset($_POST['post_id']) && isset($_POST['quiz_title']) && isset($_POST['quiz_description']))
+if(isset($_POST['post_id']) && isset($_POST['quiz_title']) && isset($_POST['quiz_description']))
 {
-    $group_id = $_POST['group_id'];
     $post_id = $_POST['post_id'];
     $quiz_title = $_POST['quiz_title'];
     $quiz_description = $_POST['quiz_description'];
@@ -42,11 +42,11 @@ if(isset($_POST['group_id']) && isset($_POST['post_id']) && isset($_POST['quiz_t
         }
         
         echo "<script>alert('Quiz Created Successfully!')</script>";
-        echo "<script>window.location.href='../teacher_create_quiz.php?group_id=".$group_id."&post_id=".$post_id."&quiz_id=".$quiz_id."'</script>";
+        echo "<script>window.location.href='../teacher_create_quiz.php?post_id=".$post_id."&quiz_id=".$quiz_id."'</script>";
     }
 }
 else
 {
-    die("<script>window.history.go(-1)</script>");
+    die("<script>window.history.go(-1);</script>");
 }
 ?>
