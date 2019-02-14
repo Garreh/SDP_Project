@@ -11,31 +11,31 @@
 <?php
     include "back/conn.php";
     session_start();
-    $page = "post";
+    $page = "my_post";
     include "css/navbar.php";
-    if(!isset($_SESSION['student']))
+    if(!isset($_SESSION['teacher']))
     {
-        echo "<script>alert('You did not login yet! student')</script>";
+        echo "<script>alert('You did not login yet! Teacher')</script>";
         die("<script>window.location.href='../login_page.php'</script>");
     }
     else
     {
-        $student = $_SESSION['student'];
-        $query = "SELECT * FROM student WHERE student_username = '$student'";
+        $teacher = $_SESSION['teacher'];
+        $query = "SELECT * FROM teacher WHERE teacher_username = '$teacher'";
         $result = mysqli_query($conn,$query);
         while($row = mysqli_fetch_array($result))
         {
-            $student_id = $row['student_id'];
+            $teacher_id = $row['teacher_id'];
         }
     }
 ?>
 
 <script type="text/javascript" src="/SDP/javascripts/main.js"></script>
-<button class='btn btn-success float-right' onclick="location.href='student_create_post.php'" style='margin:3%'>Create Post</button>
+<button class='btn btn-success float-right' onclick="location.href='teacher_create_post.php'" style='margin:3%'>Create Post</button>
 <!--Post -->
  <div class="post">
   <div class="container" style='margin-top: 2%;margin-bottom:15%;width:35%'>
-      <center><h1>Post List</h1></center>
+      <center><h1>My Post</h1></center>
       <br>
 			<div class="row">
 				<div class="col">
@@ -47,7 +47,7 @@
                <?php
 
 
-                  $sql = "Select * from post inner join teacher on post.teacher_id = teacher.teacher_id WHERE post_type = 'PUBLIC' ORDER BY post_id DESC";
+                  $sql = "Select * from post inner join teacher on post.teacher_id = teacher.teacher_id WHERE post_type = 'PUBLIC' AND teacher.teacher_id = '$teacher_id'  ORDER BY post_id DESC";
 
 
                   $result = mysqli_query($conn, $sql);
@@ -71,7 +71,7 @@
                               echo"<div class='col p-3' style='color:white;' >";
                               echo"<i class='text-muted' >".$rows['post_date']."</i>";
                               echo"<br><br>";
-                              echo"".$rows['post_title']."";
+                              echo"<b style='color:black;'>".$rows['post_title']."</b>";
                               echo"<br><br><br><br>";
                               echo"<i class='text-muted'>".$rows['first_name']." ".$rows['last_name']."</i>";
                               echo"</div>";
@@ -89,7 +89,7 @@
                               echo"<div class='col p-3' style='color:white;' >";
                               echo"<i class='text-muted' >".$rows['post_date']."</i>";
                               echo"<br><br>";
-                              echo"".$rows['post_title']."";
+                            echo"<b style='color:black;'>".$rows['post_title']."</b>";
                               echo"<br><br><br><br>";
                               echo"<i class='text-muted'>".$rows['first_name']." ".$rows['last_name']."</i>";
                               echo"</div>";
@@ -98,7 +98,17 @@
                             }
 					  }
 				 ?>
-    
+         <!-- echo"<div class='post'>";
+         echo"<div class='post_desc'>";
+         echo "<div class='product_title'><a href='post_detail.php?post_id=".$rows['post_id']."'><img src='../post_img/default.png' width='20%' height='10%'/><br/>".$rows['post_title']."</a></div>";
+         echo"</div>";
+         echo"</div><hr/>"; -->
+
+         <!-- echo"<div class='post'>";
+         echo"<div class='post_desc'>";
+         echo "<div class='product_title'><a href='post_detail.php?post_id=".$rows['post_id']."'><img src='".$rows['post_picture']."' width='20%' height='10%'/><br/>".$rows['post_title']."</a></div>";
+         echo"</div>";
+         echo"</div><hr/>"; -->
 
      </div>
     </div>

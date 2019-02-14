@@ -24,9 +24,9 @@ if(isset($_POST['post_title']) && isset($_POST['post_desc']))
     $post_title = $_POST['post_title'];
     $post_desc = $_POST['post_desc'];
     $post_type = "PUBLIC";
-    date_default_timezone_set('Asia/Kuala_Lumpur'); 
+    date_default_timezone_set('Asia/Kuala_Lumpur');
     $date = date("Y-m-d H:i:s");
-    
+
     if(!empty($_FILES['upload_post_file']['name']))
     {
         include "post_file_upload.php";
@@ -48,9 +48,9 @@ if(isset($_POST['post_title']) && isset($_POST['post_desc']))
             {
                 $post_id = $row['post_id'];
             }
-            
+
             echo "<script>alert('Post Created Successfully!')</script>";
-            echo "<script>window.location.href='../teacher_post_detail.php?post_id=".$post_id."'</script>";
+            echo "<script>window.location.href='../post_detail.php?post_id=".$post_id."'</script>";
         }
     }
     else
@@ -72,14 +72,13 @@ if(isset($_POST['post_title']) && isset($_POST['post_desc']))
             {
                 $post_id = $row['post_id'];
             }
-            
+
             echo "<script>alert('Post Created Successfully!')</script>";
-           
-            echo "<script>window.location.href='../teacher_post_detail.php?post_id=".$post_id."'</script>";
+
+            echo "<script>window.location.href='../post_detail.php?post_id=".$post_id."'</script>";
         }
     }
 }
-    
-    
+
+
 ?>
- 

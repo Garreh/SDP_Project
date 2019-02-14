@@ -3,14 +3,14 @@
 <head>
 <title>Group Post Details</title>
 <?php include "css/header.php"; session_start(); ?>
-    
+
 </head>
 
-<?php 
+<?php
     $page = "group";
     include "css/navbar.php";
     include "back/conn.php";
-    
+
     if(!isset($_SESSION['teacher']))
     {
         echo "<script>alert('You did not login yet! Teacher')</script>";
@@ -18,7 +18,7 @@
     }
     else
     {
-        
+
         $teacher = $_SESSION['teacher'];
         $query = "SELECT * FROM teacher WHERE teacher_username = '$teacher'";
         $result = mysqli_query($conn,$query);
@@ -27,12 +27,12 @@
             $teacher_id = $row['teacher_id'];
         }
     }
-    
+
     if(isset($_GET['group_id']) && isset($_GET['post_id']))
     {
         $group_id = $_GET['group_id'];
         $post_id = $_GET['post_id'];
-        
+
         $sql = "SELECT * FROM post WHERE post_id = '$post_id' AND teacher_id = '$teacher_id' AND group_id = '$group_id'";
         $result = mysqli_query($conn,$sql);
         while($rows = mysqli_fetch_array($result))
@@ -41,7 +41,7 @@
             $post_description = $rows['post_description'];
             $post_date = $rows['post_date'];
         }
-?> 
+?>
 <button class='btn btn-warning float-left' style='margin:2%;' onclick="location.href='teacher_view_group.php?group=<?php echo $group_id ?>'">Back</button>
     <div class='container-fluid w-50' style='margin-top:2%; margin-bottom:15%;'>
         <div class='card'>
@@ -67,29 +67,29 @@
             </div>
         </div>
     </div>
- 
+
 <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-    
+
     <!-- The MATERIAL Modal -->
   <div class="modal fade" id="materialModal">
     <div class="modal-dialog">
       <div class="modal-content">
-      
+
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Add New Material</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
+
         <!-- Modal body -->
         <div class="modal-body">
-        <?php 
+        <?php
             $sql = "SELECT * FROM material INNER JOIN post ON material.post_id = post.post_id WHERE material.post_id = '$post_id' AND post.group_id = '$group_id'";
             $result = mysqli_query($conn,$sql);
             if(mysqli_num_rows($result)<=0)
             {
         ?>
-            
+
             <form method='post' action='back/insert_group_material.php' enctype="multipart/form-data">
                 <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
                 <input type='hidden' name='group_id' value='<?php echo $group_id ?>'/>
@@ -106,14 +106,14 @@
                 <input type='submit' class='w-25 btn btn-success' value='Create'/>
                 </center>
             </form>
-            
-        <?php    
+
+        <?php
             }
             else
             {
         ?>
-            
-            
+
+
             <form method='post' action='back/insert_group_material.php' enctype="multipart/form-data">
                 <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
                 <input type='hidden' name='group_id' value='<?php echo $group_id ?>'/>
@@ -130,7 +130,7 @@
                 <input type='submit' class='w-25 btn btn-success' value='Create'/>
                 </center>
             </form>
-           
+
             <hr/><h4>Material Listing</h4>
         <?php
                 $material_total = 1;
@@ -138,12 +138,16 @@
                 {
                     $material_id = $row['material_id'];
                     $material_title = $row['material_title'];
+                    $file = $row['material_image'];
         ?>
             <hr/><h5>
-        <?php 
+        <?php
             echo $material_total.". ";
-            echo "<a href='group_material_detail.php?group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'>".$material_title."</a>";
+            // echo "<a href='back/download_file.php?file=".$file."'s>".$material_title."        <button>Download</button></a>";
+            echo "<a href='back/teacher_edit_material.php??group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'>".$material_title."&nbsp;&nbsp;</a> ";
+            echo "<a  href='back/download_file.php?file=".$file."'s>Download</a>&nbsp;";
             echo "<a class='float-right' href='back/delete_group_material.php?group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'>Delete</a>";
+
         ?>
             </h5>
         <?php
@@ -152,38 +156,38 @@
             }
         ?>
         </div>
-        
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
-        
+
       </div>
     </div>
   </div>
 
 <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-    
+
 <!-- The QUIZ Modal -->
   <div class="modal fade" id="quizModal">
     <div class="modal-dialog">
       <div class="modal-content">
-      
+
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Create New Quiz</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
+
         <!-- Modal body -->
         <div class="modal-body">
-         <?php 
+         <?php
             $sql = "SELECT * FROM quiz INNER JOIN post ON quiz.post_id = post.post_id WHERE quiz.post_id = '$post_id' AND post.group_id = '$group_id'";
             $result = mysqli_query($conn,$sql);
             if(mysqli_num_rows($result)<=0)
             {
         ?>
-            
+
             <form method='post' action='back/insert_group_quiz.php'>
                 <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
                 <input type='hidden' name='group_id' value='<?php echo $group_id ?>'/>
@@ -197,14 +201,14 @@
                 <input type='submit' class='w-25 btn btn-success' value='Create'/>
                 </center>
             </form>
-            
-        <?php    
+
+        <?php
             }
             else
             {
         ?>
-            
-            
+
+
             <form method='post' action='back/insert_group_quiz.php'>
                 <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
                 <input type='hidden' name='group_id' value='<?php echo $group_id ?>'/>
@@ -218,7 +222,7 @@
                 <input type='submit' class='w-25 btn btn-success' value='Create'/>
                 </center>
             </form>
-            
+
             <hr/><h4>Quiz Listing</h4>
         <?php
                 $quiz_total = 1;
@@ -228,7 +232,7 @@
                     $quiz_title = $row['quiz_title'];
         ?>
             <hr/><h5>
-        <?php 
+        <?php
             echo $quiz_total.". ";
             echo "<a href='teacher_edit_quiz.php?group_id=".$group_id."&post_id=".$post_id."&quiz_id=".$quiz_id."'>".$quiz_title."</a>";
             echo "<a class='float-right' href='back/delete_group_quiz.php?group_id=".$group_id."&post_id=".$post_id."&quiz_id=".$quiz_id."'>Delete</a>";
@@ -240,12 +244,12 @@
             }
         ?>
         </div>
-        
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -256,22 +260,22 @@
   <div class="modal fade" id="testModal">
     <div class="modal-dialog">
       <div class="modal-content">
-      
+
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Test</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
+
         <!-- Modal body -->
         <div class="modal-body">
-         <?php 
+         <?php
             $sql = "SELECT * FROM test INNER JOIN post ON test.post_id = post.post_id WHERE test.post_id = '$post_id' AND post.group_id = '$group_id'";
             $result = mysqli_query($conn,$sql);
             if(mysqli_num_rows($result)<=0)
             {
         ?>
-            
+
             <form method='post' action='back/insert_group_test.php'>
                 <input type='hidden' name='post_id' value='<?php echo $post_id ?>'/>
                 <input type='hidden' name='group_id' value='<?php echo $group_id ?>'/>
@@ -285,8 +289,8 @@
                 <input type='submit' class='w-25 btn btn-success' value='Create'/>
                 </center>
             </form>
-            
-        <?php    
+
+        <?php
             }
             else
             {
@@ -298,7 +302,7 @@
                     $test_description = $row['test_description'];
         ?>
             <h5>
-        <?php 
+        <?php
             echo "<a href='teacher_edit_test.php?group_id=".$group_id."&post_id=".$post_id."&test_id=".$test_id."'>".$test_title."</a>";
             echo "<a class='float-right' href='back/delete_group_test.php?group_id=".$group_id."&post_id=".$post_id."&test_id=".$test_id."'>Delete</a><hr/>";
             echo "<p class='text-dark'>".$test_description."</p>";
@@ -310,22 +314,22 @@
             }
         ?>
         </div>
-        
+
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
-        
+
       </div>
     </div>
   </div>
-    
+
 <?php
     }
     else
     {
-        die("<script>window.location.href='teacher_view_group.php'</script>");   
-    }    
+        die("<script>window.location.href='teacher_view_group.php'</script>");
+    }
 ?>
 <?php include "css/footer.php"; ?>
 </html>

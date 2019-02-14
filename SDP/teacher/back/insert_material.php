@@ -19,9 +19,8 @@ else
     }
 }
 
-if(isset($_POST['group_id']) && isset($_POST['post_id']) && isset($_POST['material_title']) && isset($_POST['material_description']))
+if(isset($_POST['post_id']) && isset($_POST['material_title']) && isset($_POST['material_description']))
 {
-    $group_id = $_POST['group_id'];
     $post_id = $_POST['post_id'];
     $material_title = $_POST['material_title'];
     $material_description = $_POST['material_description'];
@@ -49,7 +48,7 @@ if(isset($_POST['group_id']) && isset($_POST['post_id']) && isset($_POST['materi
             }
 
             echo "<script>alert('Material Created Successfully!')</script>";
-            echo "<script>window.location.href='../group_material_detail.php?group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'</script>";
+            echo "<script>window.location.href='../teacher_create_material.php?post_id=".$post_id."&material_id=".$material_id."'</script>";
         }
     }
     else
@@ -74,7 +73,7 @@ if(isset($_POST['group_id']) && isset($_POST['post_id']) && isset($_POST['materi
 
             echo "<script>alert('Material Created Successfully!')</script>";
 
-            echo "<script>window.location.href='../group_material_detail.php?group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'</script>";
+            echo "<script>window.location.href='../teacher_create_material.php?post_id=".$post_id."&material_id=".$material_id."'</script>";
         }
     }
 }
