@@ -49,7 +49,7 @@ if(isset($_POST['group_id']) && isset($_POST['post_id']) && isset($_POST['materi
             }
 
             echo "<script>alert('Material Created Successfully!')</script>";
-            echo "<script>window.location.href='../group_material_detail.php?group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'</script>";
+            echo "<script>window.location.href='../group_post_detail.php?group_id=".$group_id."&post_id=".$post_id."'</script>";
         }
     }
     else
@@ -74,7 +74,7 @@ if(isset($_POST['group_id']) && isset($_POST['post_id']) && isset($_POST['materi
 
             echo "<script>alert('Material Created Successfully!')</script>";
 
-            echo "<script>window.location.href='../group_material_detail.php?group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'</script>";
+            echo "<script>window.location.href='../group_post_detail.php?group_id=".$group_id."&post_id=".$post_id."'</script>";
         }
     }
 }

@@ -51,12 +51,12 @@
             <div class="col-sm-7 text-center">
               <input type="submit" class="button btn-lg pl-5 pr-5" value="Login" onclick="stdlogin()"/>
             </div>
-            
+
             <div class="col-sm-7 text-center">
               <p style="font-size:1em;color:red;padding-top:10px;" id="errmsg"></p>
             </div>
           </div>
-            
+
           <div class="form-group row justify-content-center">
             <div class="col-sm-4">
               <small id="passwordHelpBlock" class="form-text text-muted">

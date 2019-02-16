@@ -48,7 +48,7 @@ if(isset($_POST['post_id']) && isset($_POST['material_title']) && isset($_POST['
             }
 
             echo "<script>alert('Material Created Successfully!')</script>";
-            echo "<script>window.location.href='../teacher_create_material.php?post_id=".$post_id."&material_id=".$material_id."'</script>";
+            echo "<script>window.location.href='../post_detail.php?post_id=".$post_id."&material_id=".$material_id."'</script>";
         }
     }
     else
@@ -73,7 +73,7 @@ if(isset($_POST['post_id']) && isset($_POST['material_title']) && isset($_POST['
 
             echo "<script>alert('Material Created Successfully!')</script>";
 
-            echo "<script>window.location.href='../teacher_create_material.php?post_id=".$post_id."&material_id=".$material_id."'</script>";
+            echo "<script>window.location.href='../post_detail.php?post_id=".$post_id."&material_id=".$material_id."'</script>";
         }
     }
 }

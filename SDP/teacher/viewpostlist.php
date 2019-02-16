@@ -64,7 +64,7 @@
 
                             if(is_null($post_file))
                             {
-                              echo"<div class='row p-2 pt-3' style='background-color:#f8f9fa;border-radius:5px;border:1px solid black;'>";
+                              echo"<div class='row p-2 pt-3' style='background-color:#f8f9fa;border-radius:5px;'>";
                               echo"<div class='col-6'style='width:100%;height:200px'>";
                               echo"<a href='post_detail.php?post_id=".$rows['post_id']."'><img src='../post_img/default.png' width='290' height='190'style=' border-radius:5px;padding-top:3px;' /></a>";
                               echo"</div>";
@@ -82,7 +82,7 @@
                             }
                             else
                             {
-                              echo"<div class='row p-2 pt-3' style='background-color:#f8f9fa;border-radius:5px; border:1px solid black;'>";
+                              echo"<div class='row p-2 pt-3' style='background-color:#f8f9fa;border-radius:5px; '>";
                               echo"<div class='col-6'style='width:100%;height:200px'>";
                               echo"<a href='post_detail.php?post_id=".$rows['post_id']."'><img src='".$rows['post_picture']."' width='290' height='190'style=' border-radius:5px;padding-top:3px;' /></a>";
                               echo"</div>";

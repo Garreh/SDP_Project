@@ -123,10 +123,14 @@
                 <label>Material Description</label>
                 <textarea name='material_description' class='form-control' required='required' placeholder='Please enter the material description...'></textarea>
                 <br/>
-                <center>
-                <label for='material_image' style='margin-left:15%'>Upload Image</label>
-                <input type='file' id='material_image' name='material_image'/>
+
+        
+                <label for='material_image' >Material File</label>
+                <br>
+                <input type='file' class="inputfile" id='material_image' name='material_image' />
+<br>
                 <br/>
+                <center>
                 <input type='submit' class='w-25 btn btn-success' value='Create'/>
                 </center>
             </form>
@@ -139,12 +143,14 @@
                     $material_id = $row['material_id'];
                     $material_title = $row['material_title'];
                     $file = $row['material_image'];
+
         ?>
             <hr/><h5>
         <?php
             echo $material_total.". ";
             // echo "<a href='back/download_file.php?file=".$file."'s>".$material_title."        <button>Download</button></a>";
-            echo "<a href='back/teacher_edit_material.php??group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'>".$material_title."&nbsp;&nbsp;</a> ";
+            echo "".$material_title."&nbsp;&nbsp; ";
+            // echo "<a href='back/teacher_edit_material.php??group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'>".$material_title."&nbsp;&nbsp;</a> ";
             echo "<a  href='back/download_file.php?file=".$file."'s>Download</a>&nbsp;";
             echo "<a class='float-right' href='back/delete_group_material.php?group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'>Delete</a>";
 

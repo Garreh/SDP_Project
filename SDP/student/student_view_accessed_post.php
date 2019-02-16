@@ -4,7 +4,7 @@
 <head>
 <?php include "css/header.php"; ?>
 <link href="viewpostlist.css" rel="stylesheet" type="text/css"/>
-<title>Post List</title>
+<title>Accessed List</title>
 </head>
 
 <body>
@@ -34,8 +34,8 @@
 
 <!--Post -->
  <div class="post">
-  <div class="container" style='margin-top: 2%;margin-bottom:15%;width:35%;color:black;'>
-      <center><h1>Post List</h1></center>
+  <div class="container" style='margin-top: 2%;margin-bottom:15%;width:35%'>
+      <center><h1>Accessed Post</h1></center>
       <br>
 			<div class="row">
 				<div class="col">
@@ -47,7 +47,7 @@
                <?php
 
 
-                  $sql = "Select * from post inner join teacher on post.teacher_id = teacher.teacher_id WHERE post_type = 'PUBLIC' ORDER BY post_id DESC";
+                  $sql = "Select * from access inner join post on access.post_id = post.post_id inner join teacher on post.teacher_id = teacher.teacher_id WHERE access.student_id = '$student_id' ORDER BY date";
 
 
                   $result = mysqli_query($conn, $sql);
@@ -64,7 +64,7 @@
 
                             if(is_null($post_file))
                             {
-                              echo"<div class='row p-2 pt-3' style='background-color:#f8f9fa;border-radius:5px;color:black'>";
+                              echo"<div class='row p-2 pt-3' style='background-color:#f8f9fa;border-radius:5px;'>";
                               echo"<div class='col-6'style='width:100%;height:200px'>";
                               echo"<a href='post_detail.php?post_id=".$rows['post_id']."'><img src='../post_img/default.png' width='290' height='190'style=' border-radius:5px;padding-top:3px;' /></a>";
                               echo"</div>";
@@ -82,14 +82,14 @@
                             }
                             else
                             {
-                              echo"<div class='row p-2 pt-3' style='background-color:#f8f9fa;border-radius:5px;color:black '>";
+                              echo"<div class='row p-2 pt-3' style='background-color:#f8f9fa;border-radius:5px; '>";
                               echo"<div class='col-6'style='width:100%;height:200px'>";
                               echo"<a href='post_detail.php?post_id=".$rows['post_id']."'><img src='".$rows['post_picture']."' width='290' height='190'style=' border-radius:5px;padding-top:3px;' /></a>";
                               echo"</div>";
                               echo"<div class='col p-3' style='color:white;' >";
                               echo"<i class='text-muted' >".$rows['post_date']."</i>";
                               echo"<br><br>";
-                              echo"<b style='color:black'>".$rows['post_title']."</b>";
+                            echo"<b style='color:black'>".$rows['post_title']."</b>";
                               echo"<br><br><br><br>";
                               echo"<i class='text-muted'>".$rows['first_name']." ".$rows['last_name']."</i>";
                               echo"</div>";

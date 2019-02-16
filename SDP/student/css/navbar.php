@@ -16,15 +16,15 @@
               </button>
               <div class="dropdown-menu">
                 <a class="dropdown-item <?php echo ($page == "accessed" ? "active" : "")?>" href="student_view_accessed_post.php">Accessed</a>
-                <a class="dropdown-item <?php echo ($page == "result" ? "active" : "")?>" href="student_view_result.php">My Result</a>
+                <!-- <a class="dropdown-item <?php echo ($page == "result" ? "active" : "")?>" href="student_view_result.php">My Result</a> -->
               </div>
-            </div>  
+            </div>
         </li>
         <li class="nav-item <?php echo ($page == "group" ? "active" : "")?>">
             <a class="nav-link" href="student_view_group.php">Private Group</a>
         </li>
     </ul>
-    
+
         <?php if(empty($_SESSION['student'])){ ?>
       <a class="nav-link" href="/SDP/login_page.php" style="text-decoration: none;color:#FFFFFF;">LOGIN</a>
       <a href="/SDP/signup_page.php" class="btn btn-danger btn-rounded">SIGN UP</a>

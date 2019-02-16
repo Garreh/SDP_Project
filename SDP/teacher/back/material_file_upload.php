@@ -14,13 +14,13 @@ if(!empty($_FILES['material_image']['name']))
 	$destination = "../../material_img/".$filename; // follow the previous item name
 
 	//check for file size whether more than 1MB
-	if($checkfilesize > 2000000)
+	if($checkfilesize > 10000000)
 	{
 		echo "<script>alert('Sorry image size more than 2MB. Please choose another pic!');</script>";
 		die("<script>window.history.go(-1);</script>");
 	}
 	//check for file type
-	if($getFileType != "jpg" && $getFileType != "jpeg" && $getFileType != "png" && $getFileType != "gif" && $getFileType != "JPG" && $getFileType != "JPEG" && $getFileType != "PNG" && $getFileType != "GIF")
+	if($getFileType != "jpg" && $getFileType != "jpeg" && $getFileType != "png" && $getFileType != "mp4" && $getFileType != "JPG" && $getFileType != "JPEG" && $getFileType != "PNG" && $getFileType != "GIF" && $getFileType != "pptx")
 	{
 		echo "<script>alert('Sorry image format is not correct. Please choose another pic!');</script>";
 		die("<script>window.history.go(-1);</script>");

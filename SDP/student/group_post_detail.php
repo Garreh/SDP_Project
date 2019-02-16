@@ -109,9 +109,12 @@
 
               <?php
 
-              
-                  echo $material_total.". ";
-                  echo "<a href='back/download_file.php?file=".$file."'>".$material_title."</a>";
+
+              echo $material_total.". ";
+              // echo "<a href='back/download_file.php?file=".$file."'s>".$material_title."        <button>Download</button></a>";
+              echo "".$material_title."&nbsp;&nbsp; ";
+              // echo "<a href='back/teacher_edit_material.php??group_id=".$group_id."&post_id=".$post_id."&material_id=".$material_id."'>".$material_title."&nbsp;&nbsp;</a> ";
+              echo "<a  href='back/download_file.php?file=".$file."'s>Download</a>&nbsp;";
 
 
               ?>

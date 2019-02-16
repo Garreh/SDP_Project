@@ -21,7 +21,7 @@
 <style type="text/css">
     html {position: relative !important;
   min-height: 100% !important;}
-   body { background: #FAFAFA !important; margin: 0 0 150px !important; }
+   body { background: #F2E4B9 !important; margin: 0 0 150px !important; }
     footer {
   position: absolute !important;
   left: 0 !important;
