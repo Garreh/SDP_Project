@@ -45,7 +45,7 @@
             }
             if($author == $teacher_id)
             {
-                echo "<button class='btn btn-warning float-left' style='margin:2%' data-toggle='modal' data-target='#editPost'>Edit</button>";
+                echo "<button class='btn btn-warning float-right' style='margin:2%' data-toggle='modal' data-target='#editPost'>Edit</button>";
             }
 ?>
 <div class="container-fluid w-50" style="margin-top: 1%; margin-bottom:12%">
@@ -232,8 +232,8 @@
                 <textarea name='material_description' class='form-control' required='required' placeholder='Please enter the material description...'></textarea>
                 <br/>
                 <center>
-                <label for='material_image' style='padding-left:15%'>Upload Image</label>
-                <input type='file' id='material_image' name='material_image'/>
+                <label for='material_image' style='padding-left:15%'>Upload Material</label>
+                <input type='file' id='material_image' required='required' name='material_image'/>
                 <br/>
                 <input type='submit' class='w-25 btn btn-success' value='Create'/>
                 </center>
@@ -256,9 +256,9 @@
                 <label>Material Description</label>
                 <textarea name='material_description' class='form-control' required='required' placeholder='Please enter the material description...'></textarea>
                 <br/>
-                <label for='material_image' >Upload Background</label>
+                <label for='material_image' >Upload Material</label>
                 <br>
-                <input type='file' id='material_image' name='material_image'/>
+                <input type='file' id='material_image' required='required' name='material_image'/>
                 <br/>
                 <br>
                 <center>

@@ -294,7 +294,7 @@
                     <!-- Modal body -->
                     <form method="post" action="back/create_group.php">
                     <div class="modal-body">
-                            <input type="hidden" name="group_id" value="<?php echo $group_id ?>"/>
+                            <input type="hidden" name="group_id" value="<?php if(mysqli_num_rows($q_result)>0){echo $group_id;} ?>"/>
                             <label>Group Name</label><br/>
                             <input type="text" name="group_name" class="form-control" placeholder="Enter Desired Group Name..." required="required"/><br/>
                             <label>Group Description</label><br/>
@@ -349,6 +349,8 @@
                 </div>
     
     <!-- //////////////////////////////////////////////////////////// -->
+    
+    
     <?php
         $sql = "SELECT * FROM post WHERE group_id = '$group_id'";
         $result = mysqli_query($conn,$sql);

@@ -19,6 +19,9 @@
         <li class="nav-item <?php echo ($page == "group" ? "active" : "")?>">
             <a class="nav-link" href="teacher_view_group.php">Private Group</a>
         </li>
+        <li class="nav-item <?php echo ($page == "discover" ? "active" : "")?>">
+            <a class="nav-link" href="discover.php">Discover</a>
+        </li>
     </ul>
     
         <?php if(empty($_SESSION['teacher'])){ ?>

@@ -31,8 +31,20 @@
     {    
         $post_id = $_GET['post_id'];
         $test_id = $_GET['test_id'];
+        if(isset($_GET['group_id']))
+        {
+            $group_id = $_GET['group_id'];
 ?>
-  
+        <button class='btn btn-warning float-left' style='margin:2%;' onclick="location.href='group_post_detail.php?group_id=<?php echo $group_id ?>&post_id=<?php echo $post_id ?>'">Back</button>
+    <?php
+        }
+        else
+        {
+    ?>
+    <button class='btn btn-warning float-left' style='margin:2%;' onclick="location.href='post_detail.php?post_id=<?php echo $post_id ?>'">Back</button>
+    <?php
+        }
+  ?>
 <div class="container-fluid w-50" style="margin-top:1%; margin-bottom:15%;">
     <div class="card card-light">
         <div class="card-header text-center">

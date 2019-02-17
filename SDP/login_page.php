@@ -63,7 +63,7 @@
                 <a href="/SDP/signup_page.php">Need an account? Sign up here.</a>
               </small>
               <small id="passwordHelpBlock" class="form-text text-muted">
-                <a href="#">Forgot your password?</a>
+                <a href="forgot_password.php">Forgot your password?</a>
               </small>
             </div>
           </div>
@@ -97,7 +97,7 @@
           <div class="form-group row justify-content-center">
             <div class="col-sm-4">
               <small id="passwordHelpBlock" class="form-text text-muted">
-                <a href="#">Forgot your password?</a>
+                <a href="forgot_password.php">Forgot your password?</a>
               </small>
             </div>
           </div>

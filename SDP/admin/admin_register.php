@@ -35,6 +35,14 @@ function(){
 });
 </script>
 <title>Admin Register</title>
+    <?php
+        session_start();
+        if(!isset($_SESSION['admin']))
+        {
+            echo "<script>alert('Please Login first')</script>";
+            die("<script>window.location.href='admin_login.php'</script>");
+        }
+    ?>
 </head>
 
 <body>
@@ -53,12 +61,6 @@ function(){
     <button class="login_button" onclick="location.href='admin_login.php'">Login</button>  
     <?php } ?>
 </div>
-    <?php
-    if(isset($_SESSION['admin']))
-    {
-        session_destroy();
-    }
-    ?>
     <div class="body">
     <center>
         

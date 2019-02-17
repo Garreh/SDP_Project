@@ -86,7 +86,6 @@
                      echo"<div class='card'style='height:200px;width:200px; margin-right:180px;border:none;background-color:transparent;'>";
                      echo"<a href='post_detail.php?post_id=".$rows['post_id']."'><img src='".$rows['post_picture']."' width='350' height='200'  /><a/>";
                      echo"</div>";
-
                  }
   }
   ?>

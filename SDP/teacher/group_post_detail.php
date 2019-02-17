@@ -101,7 +101,7 @@
                 <br/>
                 <center>
                 <label for='material_image' style='padding-left:15%'>Upload Image</label>
-                <input type='file' id='material_image' name='material_image'/>
+                <input type='file' id='material_image' required='required' name='material_image'/>
                 <br/>
                 <input type='submit' class='w-25 btn btn-success' value='Create'/>
                 </center>
@@ -127,7 +127,7 @@
         
                 <label for='material_image' >Material File</label>
                 <br>
-                <input type='file' class="inputfile" id='material_image' name='material_image' />
+                <input type='file' class="inputfile" required='required' id='material_image' name='material_image' />
 <br>
                 <br/>
                 <center>

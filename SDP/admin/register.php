@@ -1,6 +1,7 @@
 <?php
 
     include "conn.php";
+    session_start();
     if(isset($_POST['password']) && isset($_POST['password2']))
     {
         if($_POST['password'] != $_POST['password2'])

@@ -102,7 +102,7 @@
         {
             $group_id = $row['group_id'];
             $title = $row['group_title'];
-            echo "<h2 style=\"margin-right: 50%;\">$title</h2>";
+           echo "<button class='btn w-100' title='Click to view Description' data-toggle='modal' data-target='#titleDescription' style='background-color:inherit; font-size: 25px;'>$title</button>";
         } 
                     
 ?>                 
@@ -267,7 +267,40 @@
     if(isset($_GET['group']))
     {
         ?>
+     <!-- //////////////////////////////////////////////////////////// -->
+                <!-- Title Description Modal -->
+                <div class="modal fade" id="titleDescription">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Group Description</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <?php 
+                            $sql_description = "SELECT * FROM private_group WHERE group_id = '$group_id'";
+                            $result_description = mysqli_query($conn,$sql_description);
+                            while($row = mysqli_fetch_array($result_description))
+                            {
+                                $group_description = $row['group_description'];
+                            }
+                            ?>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                            <?php echo $group_description ?>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
     
+    <!-- //////////////////////////////////////////////////////////// -->
     <!-- //////////////////////////////////////////////////////////// -->
     
                 <!-- Member List Modal -->

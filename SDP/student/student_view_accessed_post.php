@@ -47,7 +47,7 @@
                <?php
 
 
-                  $sql = "Select * from access inner join post on access.post_id = post.post_id inner join teacher on post.teacher_id = teacher.teacher_id WHERE access.student_id = '$student_id' ORDER BY date";
+                  $sql = "Select * from access inner join post on access.post_id = post.post_id inner join teacher on post.teacher_id = teacher.teacher_id WHERE access.student_id = '$student_id' ORDER BY access.date DESC";
 
 
                   $result = mysqli_query($conn, $sql);

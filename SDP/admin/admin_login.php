@@ -28,7 +28,6 @@ if (check.type === "password") {
     <?php if(isset($_SESSION['admin'])){ ?>
     <button class="register_button" onclick="location.href='logout.php'">Logout</button>
     <?php } else { ?>
-    <button class="register_button" onclick="location.href='admin_register.php'">Register</button>
     <button class="login_button" onclick="location.href='admin_login.php'">Login</button>  
     <?php } ?>
 </div>
@@ -48,7 +47,7 @@ if (check.type === "password") {
                 <td><input type="text" name="username" placeholder="Login Username"/></td>
             </tr>
             <tr>
-                <td><input type="password" name="password" placeholder="Login Password"/></td>
+                <td><input type="password" id="password" name="password" placeholder="Login Password"/></td>
             </tr>
             <tr>
             <td style="padding-left: 21%"><input type="checkbox" id="show" onclick="showPsw()" name="show"/>Show Password</td>

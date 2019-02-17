@@ -57,7 +57,7 @@ $(document).ready(function(){
 <body>
 <?php include "navi.php" ?>
 <center>
-
+<div style="margin-bottom:15%;">
     <button class="manage_register" onclick="showBox()">Manage Teacher</button>
     <button class="manage_register" onclick="showBox1()">Register Teacher</button>
 
@@ -149,6 +149,7 @@ $(document).ready(function(){
             <input type="submit" id="Register" value="Register"/>
         </form>
     </div>
+</div>
 </center>
     
     

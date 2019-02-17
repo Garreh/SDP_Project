@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Edit Quiz</title>    
+<title>Edit Question</title>    
 <?php include "css/header.php"; session_start(); ?>
 </head>
 
@@ -339,7 +339,7 @@ else
             else if(isset($_GET['test_id']))
             {
                 $test_id = $_GET['test_id'];
-                echo "<button class='btn btn-secondary' onclick=\"location.href='teacher_edit_quiz.php?post_id=$post_id&test_id=$test_id'\">DONE</button>";
+                echo "<button class='btn btn-secondary' onclick=\"location.href='teacher_edit_test.php?post_id=$post_id&test_id=$test_id'\">DONE</button>";
             }
             
         ?>

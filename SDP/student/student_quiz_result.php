@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View Quiz</title>
+    <title>View Result</title>
     <?php
     session_start();
     include "css/header.php";

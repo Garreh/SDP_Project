@@ -1,5 +1,3 @@
-<?php session_start();
-?>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark pt-3 pb-3 " style="background-color:#3A3837;font-family:Roboto;">
   <a class="navbar-brand" href="home_page.php">History</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +10,7 @@
         <a class="nav-link" href="home_page.php">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="view_post.php">Post</a>
+        <a class="nav-link" href="viewpostlist.php">Post</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="discover.php">Discover</a>
